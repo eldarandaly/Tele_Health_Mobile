@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "189488264527",
+    "firebase_url": "https://telehealthserver-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "telehealthserver",
+    "storage_bucket": "telehealthserver.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189488264527:android:dbec3e13c745bf48d5413a",
+        "android_client_info": {
+          "package_name": "com.example.telehealthcare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189488264527-k8285nl0d7oriqga0fht8i4p77mfpbbk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOhXXD7ptdce6uGAEw_kfz6-8j6X2vFnU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189488264527-k8285nl0d7oriqga0fht8i4p77mfpbbk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "189488264527-ikcf6rhqaerd2p3tg0em6m89njjotlbi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.telehealthcare"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
