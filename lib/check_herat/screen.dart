@@ -15,7 +15,7 @@ class PredictPage extends StatefulWidget {
 
 class _PredictPageState extends State<PredictPage> {
   final Api api = Api();
-  final GetReading getReads = GetReading(serachEmail: WhatUser.email);
+
   String _result = "";
   int Age = 0;
   int Sex = 0;
@@ -30,7 +30,6 @@ class _PredictPageState extends State<PredictPage> {
   int ST_Slope = 1;
   void _getPrediction() async {
     try {
-      getReads;
       var response = await api.predict([
         Age,
         Sex,

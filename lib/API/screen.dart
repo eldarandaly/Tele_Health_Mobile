@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:telehealthcare/seach_in_forget_pass.dart';
+import 'package:telehealthcare/user_data.dart';
 
 class FirebaseAPI {
   String serachEmail;
@@ -51,16 +52,18 @@ class Api {
 }
 
 class GetReading {
-  String serachEmail;
-  GetReading({Key? key, required this.serachEmail});
+  // String serachEmail;
+  // GetReading({Key? key, required this.serachEmail});
   // final CollectionReference collectionReference = Firestore.instance.collection('your_collection_name');
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
-  Future<List<Map<String, dynamic>>> getData() async {
-    final DocumentSnapshot snapshot =
-        await _db.collection("users data").doc(serachEmail.toString()).get();
+  // final FirebaseFirestore _db = FirebaseFirestore.instance;
+  static getData() async {
+    final DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection("users data")
+        .doc(WhatUser.email)
+        .get();
 
-    final List<Map<String, dynamic>> data =
-        snapshot.get(['Heart_Rate_Readings']);
+    final data = snapshot['Heart_Rate_Readings'];
+    print(data);
     return data;
   }
 }
