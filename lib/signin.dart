@@ -163,6 +163,23 @@ class _signinState extends State<signin> {
                   children: [
                     ElevatedButton.icon(
                       onPressed: () async {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text("Pop UP"),
+                              content: Text('Welecome ${WhatUser.email}'),
+                              actions: <Widget>[
+                                ElevatedButton(
+                                  child: const Text("OK"),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
                         if (_formkey.currentState!.validate()) {
                           dynamic result = await _auth
                               .signinwithemailandpassword(email, password);

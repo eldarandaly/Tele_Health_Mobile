@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print
 
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
@@ -55,20 +57,33 @@ class GetReading {
   // String serachEmail;
   // GetReading({Key? key, required this.serachEmail});
   // final CollectionReference collectionReference = Firestore.instance.collection('your_collection_name');
-  // final FirebaseFirestore _db = FirebaseFirestore.instance;
-  static getData() async {
-    final DocumentSnapshot snapshot = await FirebaseFirestore.instance
-        .collection("users data")
-        .doc(WhatUser.email)
-        .get();
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  Future<List<Map<String, dynamic>>> getData() async {
+    final DocumentSnapshot snapshot =
+        await _db.collection("users data").doc(WhatUser.email).get();
 
-    final data = snapshot['Heart_Rate_Readings'];
-    print(data);
-    return data;
+    final List<dynamic> data = snapshot['Heart_Rate_Readings'];
+    // final x = data as List<Map<String, dynamic>>;
+    // print(x);
+    return data.cast<Map<String, dynamic>>();
   }
 }
 
+class GetModelReading {
+  // String serachEmail;
+  // GetReading({Key? key, required this.serachEmail});
+  // final CollectionReference collectionReference = Firestore.instance.collection('your_collection_name');
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  Future<Map<String, dynamic>> getModelData() async {
+    final DocumentSnapshot snapshot =
+        await _db.collection("users data").doc(WhatUser.email).get();
 
+    final data = snapshot['model_data'];
+    // final x = data as List<Map<String, dynamic>>;
+    // print(x);
+    return data;
+  }
+}
 // class MyAPI {
 //   final dio = Dio();
 

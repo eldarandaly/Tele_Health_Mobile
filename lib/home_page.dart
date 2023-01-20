@@ -1,12 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:telehealthcare/API/screen.dart';
-import 'package:telehealthcare/check_herat/screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:telehealthcare/API/api_calls.dart';
+import 'package:telehealthcare/check_herat/chechk_heart_screen.dart';
+import 'package:telehealthcare/new_home_page/home_page.dart';
 import 'package:telehealthcare/sign_up_transition.dart';
 import 'package:telehealthcare/size_config.dart';
 import 'package:telehealthcare/user_data.dart';
-import 'package:telehealthcare/profile/body.dart';
+import 'package:telehealthcare/profile/profile_body.dart';
 import 'dart:convert';
 import 'heart_readings/enter_heart_values.dart';
 import 'heart_readings/heart_chart.dart';
@@ -110,7 +113,15 @@ class _BottomBarState extends State<BottomBar> {
           Navigator(
             onGenerateRoute: (RouteSettings settings) {
               return MaterialPageRoute(
-                builder: (BuildContext context) => PredictPage(),
+                builder: (BuildContext context) => const PredictPage(),
+                settings: settings,
+              );
+            },
+          ),
+          Navigator(
+            onGenerateRoute: (RouteSettings settings) {
+              return MaterialPageRoute(
+                builder: (BuildContext context) => const TestThisClass(),
                 settings: settings,
               );
             },
@@ -123,12 +134,12 @@ class _BottomBarState extends State<BottomBar> {
               );
             },
           ),
-          Center(
-            child: Image.asset(
-              'assets/images/logo.png',
-              width: 285.9,
-              height: 169.4,
-              fit: BoxFit.fitHeight,
+          ScreenUtilInit(
+            designSize: const Size(375, 812),
+            builder: (BuildContext context, child) => GetMaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(),
+              home: NewHomepage(),
             ),
           ),
           Navigator(
@@ -160,6 +171,8 @@ class _BottomBarState extends State<BottomBar> {
         },
         // ignore: prefer_const_literals_to_create_immutables
         items: [
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.favorite), label: 'You check'),
           const BottomNavigationBarItem(
               icon: Icon(Icons.heart_broken), label: 'Heart.ai'),
           const BottomNavigationBarItem(

@@ -168,6 +168,23 @@ class _signup2State extends State<signup2> {
               Container(height: 25),
               ElevatedButton(
                   onPressed: () async {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text("Pop UP"),
+                          content: Text('Saved ${WhatUser.email}'),
+                          actions: <Widget>[
+                            ElevatedButton(
+                              child: const Text("OK"),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
                     dynamic result =
                         await _auth.signupwithemailandpassword(email, password);
                     await DatabaseService(uid: widget.savedUser.email)

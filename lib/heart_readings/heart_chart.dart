@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:charts_flutter/src/text_element.dart' show TextDirection;
 
-import '../API/screen.dart';
+import '../API/api_calls.dart';
 
 class HeartRateChart extends StatelessWidget {
   final List<charts.Series<dynamic, int>> seriesList;
@@ -44,36 +44,100 @@ class HeartRateSeries {
   HeartRateSeries(this.time, this.rate);
 }
 
+// class HeartRateLineChart extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     final GetReading getReads = GetReading();
+//     var chartData = getReads.getData();
+//     final data = [
+//       {'time': 0, 'rate': 70},
+//       {'time': 1, 'rate': 80},
+//       {'rate': 85, 'time': 2},
+//       {'time': 3, 'rate': 95},
+//       {'rate': 94, 'time': 4},
+//       {'time': 5, 'rate': 99},
+//       {'time': 6, 'rate': 100},
+//       {'time': 7, 'rate': 115},
+//       {'time': 8, 'rate': 100},
+//       {'rate': 121, 'time': 9},
+//       {'rate': 130, 'time': 10},
+//       {'time': 11, 'rate': 125},
+//       {'time': 12, 'rate': 113},
+//       {'rate': 134, 'time': 13},
+//       {'rate': 142, 'time': 14}
+//     ];
+//     final myHeartRateData =
+//         data.map((e) => HeartRateSeries(e['time']!, e['rate']!)).toList();
+//     final seriesList = [
+//       charts.Series<HeartRateSeries, int>(
+//         id: 'HeartRate',
+//         colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
+//         domainFn: (HeartRateSeries hr, _) => hr.time,
+//         measureFn: (HeartRateSeries hr, _) => hr.rate,
+//         data: myHeartRateData,
+//       ),
+//     ];
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('Heart Readings'),
+//       ),
+//       body: Center(
+//         child: Container(
+//           width: MediaQuery.of(context).size.width * 0.8,
+//           height: MediaQuery.of(context).size.height * 0.8,
+//           child: Center(
+//             child: HeartRateChart(seriesList, animate: true),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 class HeartRateLineChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // final GetReading getReads = GetReading();
-    var chartData = GetReading.getData();
-    final data = chartData;
-    final myHeartRateData =
-        data.map((e) => HeartRateSeries(e['time']!, e['rate']!)).toList();
-    final seriesList = [
-      charts.Series<HeartRateSeries, int>(
-        id: 'HeartRate',
-        colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
-        domainFn: (HeartRateSeries hr, _) => hr.time,
-        measureFn: (HeartRateSeries hr, _) => hr.rate,
-        data: myHeartRateData,
-      ),
-    ];
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Heart Readings'),
-      ),
-      body: Center(
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.8,
-          height: MediaQuery.of(context).size.height * 0.8,
-          child: Center(
-            child: HeartRateChart(seriesList, animate: true),
-          ),
-        ),
-      ),
+    return FutureBuilder<List<Map<String, dynamic>>>(
+      future: GetReading().getData(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final data = snapshot.data;
+
+          // map the data to the HeartRateSeries class
+          final myHeartRateData = data!
+              .map((e) => HeartRateSeries(e['time']!, e['rate']!))
+              .toList();
+
+          // create the series list
+          final seriesList = [
+            charts.Series<HeartRateSeries, int>(
+              id: 'HeartRate',
+              colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
+              domainFn: (HeartRateSeries hr, _) => hr.time,
+              measureFn: (HeartRateSeries hr, _) => hr.rate,
+              data: myHeartRateData,
+            ),
+          ];
+
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Heart Readings'),
+            ),
+            body: Center(
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.8,
+                height: MediaQuery.of(context).size.height * 0.8,
+                child: Center(
+                  child: HeartRateChart(seriesList, animate: true),
+                ),
+              ),
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return Text("Error: ${snapshot.error}");
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
     );
   }
 }

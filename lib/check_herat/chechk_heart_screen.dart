@@ -1,7 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:telehealthcare/API/screen.dart';
+import 'package:telehealthcare/API/api_calls.dart';
 import 'package:telehealthcare/user_data.dart';
 
 // make a pop up meassage
@@ -143,14 +143,6 @@ class _PredictPageState extends State<PredictPage> {
           width: 300,
           child: ListView(
             children: [
-              // const Text(
-              //   "Age",
-              //   style: TextStyle(
-              //       color: Colors.blueAccent,
-              //       fontWeight: FontWeight.w500,
-              //       fontStyle: FontStyle.normal,
-              //       fontSize: 20),
-              // ),
               SizedBox(
                 height: 20,
               ),
@@ -182,14 +174,6 @@ class _PredictPageState extends State<PredictPage> {
                 },
               ),
               const SizedBox(height: 20),
-              // const Text(
-              //   "Gender",
-              //   style: TextStyle(
-              //       color: Colors.blueAccent,
-              //       fontWeight: FontWeight.w500,
-              //       fontStyle: FontStyle.normal,
-              //       fontSize: 20),
-              // ),
               TextFormField(
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
@@ -217,14 +201,6 @@ class _PredictPageState extends State<PredictPage> {
                     });
                   }),
               const SizedBox(height: 20),
-              // const Text(
-              //   "ChestpainType",
-              //   style: TextStyle(
-              //       color: Colors.blueAccent,
-              //       fontWeight: FontWeight.w500,
-              //       fontStyle: FontStyle.normal,
-              //       fontSize: 20),
-              // ),
               TextFormField(
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
@@ -252,14 +228,6 @@ class _PredictPageState extends State<PredictPage> {
                     });
                   }),
               const SizedBox(height: 20),
-              // const Text(
-              //   "RestingBP",
-              //   style: TextStyle(
-              //       color: Colors.blueAccent,
-              //       fontWeight: FontWeight.w500,
-              //       fontStyle: FontStyle.normal,
-              //       fontSize: 20),
-              // ),
               TextFormField(
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
@@ -287,14 +255,6 @@ class _PredictPageState extends State<PredictPage> {
                     });
                   }),
               const SizedBox(height: 20),
-              // const Text(
-              //   "Cholesterol",
-              //   style: TextStyle(
-              //       color: Colors.blueAccent,
-              //       fontWeight: FontWeight.w500,
-              //       fontStyle: FontStyle.normal,
-              //       fontSize: 20),
-              // ),
               TextFormField(
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
@@ -322,14 +282,6 @@ class _PredictPageState extends State<PredictPage> {
                     });
                   }),
               const SizedBox(height: 20),
-              // const Text(
-              //   "FastingBS",
-              //   style: TextStyle(
-              //       color: Colors.blueAccent,
-              //       fontWeight: FontWeight.w500,
-              //       fontStyle: FontStyle.normal,
-              //       fontSize: 20),
-              // ),
               TextFormField(
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
@@ -357,14 +309,6 @@ class _PredictPageState extends State<PredictPage> {
                     });
                   }),
               const SizedBox(height: 20),
-              // const Text(
-              //   "RestingECG",
-              //   style: TextStyle(
-              //       color: Colors.blueAccent,
-              //       fontWeight: FontWeight.w500,
-              //       fontStyle: FontStyle.normal,
-              //       fontSize: 20),
-              // ),
               TextFormField(
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
@@ -392,14 +336,6 @@ class _PredictPageState extends State<PredictPage> {
                     });
                   }),
               const SizedBox(height: 20),
-              // const Text(
-              //   "MaxHR",
-              //   style: TextStyle(
-              //       color: Colors.blueAccent,
-              //       fontWeight: FontWeight.w500,
-              //       fontStyle: FontStyle.normal,
-              //       fontSize: 20),
-              // ),
               TextFormField(
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
@@ -427,14 +363,6 @@ class _PredictPageState extends State<PredictPage> {
                     });
                   }),
               const SizedBox(height: 20),
-              // const Text(
-              //   "ExerciseAngina",
-              //   style: TextStyle(
-              //       color: Colors.blueAccent,
-              //       fontWeight: FontWeight.w500,
-              //       fontStyle: FontStyle.normal,
-              //       fontSize: 20),
-              // ),
               TextFormField(
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
@@ -473,15 +401,171 @@ class _PredictPageState extends State<PredictPage> {
                     backgroundColor: Colors.blue),
               ),
               const SizedBox(height: 20),
-              // Text(
-              //   _result,
-              //   style: const TextStyle(fontSize: 24),
-              // ),
-              // const SizedBox(height: 20),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class TestThisClass extends StatefulWidget {
+  const TestThisClass({super.key});
+
+  @override
+  TestClass createState() => TestClass();
+}
+
+class TestClass extends State<TestThisClass> {
+  final GetModelReading _getModelReading = GetModelReading();
+  Map<String, dynamic> variable = <String, dynamic>{};
+  String _result = "";
+  final Api api = Api();
+
+  late int age;
+  late int sex;
+  late int chestPainType;
+  late int restingBP;
+  late int cholesterol;
+  late int fastingBS;
+  late int restingECG;
+  late int maxHR;
+  late int exerciseAngina;
+  late int oldPeak;
+  late int stSlope;
+
+  void _recivePreds() async {
+    try {
+      var response = await api.predict([
+        age,
+        sex,
+        chestPainType,
+        restingBP,
+        cholesterol,
+        fastingBS,
+        restingECG,
+        maxHR,
+        exerciseAngina,
+        oldPeak,
+        stSlope
+      ]);
+
+      setState(() {
+        _result = response.toString();
+      });
+    } on Exception catch (e) {
+      setState(() {
+        _result = e.toString();
+      });
+    }
+    if (_result == 'false') {
+      _result = 'Your herat is great';
+      {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Prediction Result"),
+              content: Text(_result),
+              actions: <Widget>[
+                ElevatedButton(
+                  child: const Text("OK"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+    }
+    if (_result == 'true') {
+      _result = 'Call 911 but not for me ';
+      {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Prediction Result"),
+              content: Text(_result),
+              actions: <Widget>[
+                ElevatedButton(
+                  child: const Text("Call 911"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+    }
+    if (age == 0) {
+      if (_result == 'false') {
+        _result = 'Please enter The data';
+        {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("Prediction Result"),
+                content: Text(_result),
+                actions: <Widget>[
+                  ElevatedButton(
+                    child: const Text("OK"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        }
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<Map<String, dynamic>>(
+      future: _getModelReading.getModelData(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final modelData = snapshot.data;
+          // modelData!.forEach((key, value) {
+          //   variable[key] = value;
+          //   print(modelData['age']);
+          // });
+          age = modelData!['age'];
+          sex = modelData['sex'];
+          chestPainType = modelData['ChestpainType'];
+          restingBP = modelData['RestingBP'];
+          cholesterol = modelData['Cholesterol'];
+          fastingBS = modelData['FastingBS'];
+          restingECG = modelData['RestingECG'];
+          maxHR = modelData['MaxHR'];
+          exerciseAngina = modelData['ExerciseAngina'];
+          oldPeak = modelData['Oldpeak'];
+          stSlope = modelData['ST_Slope'];
+          return Column(
+            children: <Widget>[
+              ElevatedButton(
+                onPressed: () {
+                  _recivePreds();
+                },
+                child: Text('Send to API'),
+              ),
+            ],
+          );
+        } else if (snapshot.hasError) {
+          return Text("Error: ${snapshot.error}");
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
     );
   }
 }
