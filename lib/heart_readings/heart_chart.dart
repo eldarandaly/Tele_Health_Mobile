@@ -120,7 +120,11 @@ class HeartRateLineChart extends StatelessWidget {
 
           return Scaffold(
             appBar: AppBar(
-              title: const Text('Heart Readings'),
+              title: const Text("TeleHealthCare",
+                  style: TextStyle(
+                      color: Colors.blueAccent, fontWeight: FontWeight.w800)),
+              backgroundColor: Colors.white,
+              centerTitle: true,
             ),
             body: Center(
               child: Container(

@@ -41,7 +41,7 @@ class _BodyState extends State<Body> {
     },
     {
       "text": "Heart Disease Prediction Using AI",
-      "image": "assets/images/casual-life-3d-pink-heart.png",
+      "image": "assets/images/heart.png",
     },
   ];
   @override

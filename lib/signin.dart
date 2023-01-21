@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:telehealthcare/database.dart';
 import 'package:telehealthcare/seach_in_forget_pass.dart';
 import 'package:telehealthcare/sign_up_2.dart';
 import 'package:telehealthcare/sign_up_transition.dart';
@@ -18,6 +19,7 @@ class signin extends StatefulWidget {
 
 class _signinState extends State<signin> {
   final _formkey = GlobalKey<FormState>();
+  final DatabaseService _mod = new DatabaseService();
   String email = "";
   String password = "";
   String error = "";
@@ -33,46 +35,50 @@ class _signinState extends State<signin> {
       //   centerTitle: true,
       // ),
       body: ListView(children: [
+        SizedBox(
+          height: 30,
+        ),
+        // Row(
+        //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //     crossAxisAlignment: CrossAxisAlignment.center,
+        //     children: [
+        //       ElevatedButton(
+        //           onPressed: () async {
+        //             //  dynamic result = await _auth.signinwithemailandpassword(email, password);
+        //           },
+        //           style: ElevatedButton.styleFrom(
+        //             fixedSize: const Size.fromWidth(200.0),
+        //             backgroundColor: Colors.blueAccent,
+        //           ),
+        //           child: const Text(
+        //             "Sign in",
+        //             style: TextStyle(color: Colors.white),
+        //           )),
+        //       ElevatedButton(
+        //           onPressed: () {
+        //             Navigator.push(
+        //                 context,
+        //                 MaterialPageRoute(
+        //                     builder: (context) =>
+        //                         const register())); // transition
+        //           },
+        //           style: ElevatedButton.styleFrom(
+        //               fixedSize: const Size.fromWidth(200.0),
+        //               backgroundColor: Colors.white),
+        //           child: const Text(
+        //             "Sign up",
+        //             style: TextStyle(color: Colors.blueAccent),
+        //           ))
+        //     ]),
         Center(
           child: Image.asset(
-            'assets/images/logo.png',
+            'assets/images/aast.png',
             width: 285.9,
-            height: 169.4,
-            fit: BoxFit.fitHeight,
+            height: 150,
+            fit: BoxFit.contain,
           ),
         ),
-        Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                  onPressed: () async {
-                    //  dynamic result = await _auth.signinwithemailandpassword(email, password);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: const Size.fromWidth(200.0),
-                    backgroundColor: Colors.blueAccent,
-                  ),
-                  child: const Text(
-                    "Sign in",
-                    style: TextStyle(color: Colors.white),
-                  )),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const register())); // transition
-                  },
-                  style: ElevatedButton.styleFrom(
-                      fixedSize: const Size.fromWidth(200.0),
-                      backgroundColor: Colors.white),
-                  child: const Text(
-                    "Sign up",
-                    style: TextStyle(color: Colors.blueAccent),
-                  ))
-            ]),
+
         Container(
             alignment: Alignment.bottomRight,
             child: IconButton(
@@ -97,7 +103,7 @@ class _signinState extends State<signin> {
                   );
                 },
                 icon: const Icon(Icons.info_outline))),
-        Container(height: 20),
+        // Container(height: 20),
         Form(
           key: _formkey,
           child: Column(
@@ -163,31 +169,51 @@ class _signinState extends State<signin> {
                   children: [
                     ElevatedButton.icon(
                       onPressed: () async {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: const Text("Pop UP"),
-                              content: Text('Welecome ${WhatUser.email}'),
-                              actions: <Widget>[
-                                ElevatedButton(
-                                  child: const Text("OK"),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        );
+                        // _mod.addUserModelData();
+                        // // _mod.addUserHRlData();
                         if (_formkey.currentState!.validate()) {
                           dynamic result = await _auth
                               .signinwithemailandpassword(email, password);
                           if (result == null) {
                             setState(() {
                               error = "please enter valid information";
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: const Text("Error"),
+                                    content:
+                                        Text('Check Your Email or Password'),
+                                    actions: <Widget>[
+                                      ElevatedButton(
+                                        child: const Text("OK"),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
                             });
                           } else {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text("Pop UP"),
+                                  content: Text('Welecome ${WhatUser.email}'),
+                                  actions: <Widget>[
+                                    ElevatedButton(
+                                      child: const Text("OK"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -278,7 +304,7 @@ class _signinState extends State<signin> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const search())); // transition
+                                      const register())); // transition
                         },
                         child: const Text("Create an account?",
                             style: TextStyle(

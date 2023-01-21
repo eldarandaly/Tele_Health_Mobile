@@ -6,6 +6,34 @@ class DatabaseService {
 
   final CollectionReference UserData =
       FirebaseFirestore.instance.collection('users data');
+  Map<String, dynamic> modelData = {
+    'age': 0,
+    'sex': 0,
+    'ChestpainType': 0,
+    'RestingBP': 0,
+    'Cholesterol': 0,
+    'FastingBS': 0,
+    'RestingECG': 0,
+    'MaxHR': 0,
+    'ExerciseAngina': 0,
+    'Oldpeak': 0,
+    'ST_Slope': 0
+  };
+  List<Map<String, dynamic>> h_R = [
+    {'time': 0, 'rate': 70},
+    {'time': 1, 'rate': 80},
+    {'rate': 85, 'time': 2},
+    {'time': 3, 'rate': 95},
+    {'rate': 94, 'time': 4},
+  ];
+  Future addUserModelData() async {
+    Map<String, dynamic> data = <String, dynamic>{'model_data': modelData};
+    return await UserData.doc(uid).set(data);
+  }
+
+  Future addUserHRlData() async {
+    return await UserData.doc(uid).set(h_R.cast<Map<String, dynamic>>);
+  }
 
   Future updateUserData(
       String email,
@@ -18,6 +46,7 @@ class DatabaseService {
       String cholestrollevel,
       String bloodpressaure,
       String bloodsugar) async {
+    Map<String, dynamic> ModelDAta = <String, dynamic>{'model_data': modelData};
     return await UserData.doc(uid).set({
       'email': email,
       'username': username,
@@ -29,6 +58,8 @@ class DatabaseService {
       'cholesterol level': cholestrollevel,
       'blood pressure': bloodpressaure,
       'blood sugar': bloodsugar,
+      'model_data': modelData,
+      'Heart_Rate_Readings': h_R
     });
   }
 }

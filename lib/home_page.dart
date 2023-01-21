@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:telehealthcare/API/api_calls.dart';
 import 'package:telehealthcare/check_herat/chechk_heart_screen.dart';
-import 'package:telehealthcare/new_home_page/home_page.dart';
 import 'package:telehealthcare/sign_up_transition.dart';
 import 'package:telehealthcare/size_config.dart';
 import 'package:telehealthcare/user_data.dart';
@@ -13,6 +12,7 @@ import 'package:telehealthcare/profile/profile_body.dart';
 import 'dart:convert';
 import 'heart_readings/enter_heart_values.dart';
 import 'heart_readings/heart_chart.dart';
+import 'new_home/home_main.dart';
 
 String globleE = '';
 final body = {
@@ -89,7 +89,7 @@ class BottomBar extends StatefulWidget {
 }
 
 class _BottomBarState extends State<BottomBar> {
-  int _currentIndex = 2;
+  int _currentIndex = 3;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -100,13 +100,13 @@ class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("TeleHealthCare",
-            style: TextStyle(
-                color: Colors.blueAccent, fontWeight: FontWeight.w800)),
-        backgroundColor: Colors.white,
-        centerTitle: true,
-      ),
+      // appBar: AppBar(
+      //   title: const Text("TeleHealthCare",
+      //       style: TextStyle(
+      //           color: Colors.blueAccent, fontWeight: FontWeight.w800)),
+      //   backgroundColor: Colors.white,
+      //   centerTitle: true,
+      // ),
       body: IndexedStack(
         index: _currentIndex,
         children: <Widget>[
@@ -134,14 +134,7 @@ class _BottomBarState extends State<BottomBar> {
               );
             },
           ),
-          ScreenUtilInit(
-            designSize: const Size(375, 812),
-            builder: (BuildContext context, child) => GetMaterialApp(
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(),
-              home: NewHomepage(),
-            ),
-          ),
+          MyApp(),
           Navigator(
             onGenerateRoute: (RouteSettings settings) {
               return MaterialPageRoute(

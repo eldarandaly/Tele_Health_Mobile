@@ -2,6 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:telehealthcare/API/api_calls.dart';
+import 'package:telehealthcare/new_home/src/theme/extention.dart';
+import 'package:telehealthcare/new_home/src/theme/light_color.dart';
+import 'package:telehealthcare/new_home/src/theme/text_styles.dart';
+import 'package:telehealthcare/new_home/src/theme/theme.dart';
 import 'package:telehealthcare/user_data.dart';
 
 // make a pop up meassage
@@ -143,7 +147,7 @@ class _PredictPageState extends State<PredictPage> {
           width: 300,
           child: ListView(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               TextFormField(
@@ -452,6 +456,7 @@ class TestClass extends State<TestThisClass> {
 
       setState(() {
         _result = response.toString();
+        print(_result);
       });
     } on Exception catch (e) {
       setState(() {
@@ -461,68 +466,68 @@ class TestClass extends State<TestThisClass> {
     if (_result == 'false') {
       _result = 'Your herat is great';
       {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text("Prediction Result"),
-              content: Text(_result),
-              actions: <Widget>[
-                ElevatedButton(
-                  child: const Text("OK"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
+        // showDialog(
+        //   context: context,
+        //   builder: (BuildContext context) {
+        //     return AlertDialog(
+        //       title: const Text("Prediction Result"),
+        //       content: Text(_result),
+        //       actions: <Widget>[
+        //         ElevatedButton(
+        //           child: const Text("OK"),
+        //           onPressed: () {
+        //             Navigator.of(context).pop();
+        //           },
+        //         ),
+        //       ],
+        //     );
+        //   },
+        // );
       }
     }
     if (_result == 'true') {
       _result = 'Call 911 but not for me ';
       {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text("Prediction Result"),
-              content: Text(_result),
-              actions: <Widget>[
-                ElevatedButton(
-                  child: const Text("Call 911"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
+        // showDialog(
+        //   context: context,
+        //   builder: (BuildContext context) {
+        //     return AlertDialog(
+        //       title: const Text("Prediction Result"),
+        //       content: Text(_result),
+        //       actions: <Widget>[
+        //         ElevatedButton(
+        //           child: const Text("Call 911"),
+        //           onPressed: () {
+        //             Navigator.of(context).pop();
+        //           },
+        //         ),
+        //       ],
+        //     );
+        //   },
+        // );
       }
     }
     if (age == 0) {
       if (_result == 'false') {
         _result = 'Please enter The data';
         {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text("Prediction Result"),
-                content: Text(_result),
-                actions: <Widget>[
-                  ElevatedButton(
-                    child: const Text("OK"),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              );
-            },
-          );
+          // showDialog(
+          //   context: context,
+          //   builder: (BuildContext context) {
+          //     return AlertDialog(
+          //       title: const Text("Prediction Result"),
+          //       content: Text(_result),
+          //       actions: <Widget>[
+          //         ElevatedButton(
+          //           child: const Text("OK"),
+          //           onPressed: () {
+          //             Navigator.of(context).pop();
+          //           },
+          //         ),
+          //       ],
+          //     );
+          //   },
+          // );
         }
       }
     }
@@ -550,22 +555,102 @@ class TestClass extends State<TestThisClass> {
           exerciseAngina = modelData['ExerciseAngina'];
           oldPeak = modelData['Oldpeak'];
           stSlope = modelData['ST_Slope'];
-          return Column(
-            children: <Widget>[
-              ElevatedButton(
-                onPressed: () {
-                  _recivePreds();
-                },
-                child: Text('Send to API'),
-              ),
-            ],
+          return Container(
+            color: Colors.grey[100],
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(
+                  height: 310,
+                  width: 190,
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 200,
+                        height: 200,
+                        child: _categoryCard("$_result", "",
+                            color: LightColor.green,
+                            lightColor: LightColor.lightGreen),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          _recivePreds();
+                        },
+                        child: Text('Press To check'),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           );
         } else if (snapshot.hasError) {
           return Text("Error: ${snapshot.error}");
         } else {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         }
       },
     );
   }
+}
+
+Widget _categoryCard(String title, String subtitle,
+    {Color? color, Color? lightColor}) {
+  TextStyle titleStyle = TextStyles.title.bold.white;
+  TextStyle subtitleStyle = TextStyles.body.bold.white;
+
+  return AspectRatio(
+    aspectRatio: 6 / 8,
+    child: Container(
+      height: 250,
+      width: 250,
+      margin: const EdgeInsets.only(left: 10, right: 10, bottom: 20, top: 10),
+      decoration: BoxDecoration(
+        color: Colors.red,
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            offset: const Offset(4, 4),
+            blurRadius: 10,
+            color: Colors.red[200]!.withOpacity(.8),
+          )
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
+        child: Container(
+          child: Stack(
+            children: <Widget>[
+              Positioned(
+                top: -20,
+                left: -20,
+                child: CircleAvatar(
+                  backgroundColor: Colors.red[200],
+                  radius: 60,
+                ),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Flexible(
+                    child: Text(title, style: titleStyle).hP8,
+                  ),
+                  const SizedBox(height: 10),
+                  Flexible(
+                    child: Text(
+                      subtitle,
+                      style: subtitleStyle,
+                    ).hP8,
+                  ),
+                ],
+              ).p16
+            ],
+          ),
+        ),
+      ).ripple(() {},
+          borderRadius: const BorderRadius.all(Radius.circular(20))),
+    ),
+  );
 }

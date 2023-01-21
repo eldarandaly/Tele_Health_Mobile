@@ -57,12 +57,23 @@ class GetReading {
   // String serachEmail;
   // GetReading({Key? key, required this.serachEmail});
   // final CollectionReference collectionReference = Firestore.instance.collection('your_collection_name');
+  List<Map<String, dynamic>> h_R = [
+    {'time': 0, 'rate': 70},
+    {'time': 1, 'rate': 80},
+    {'rate': 85, 'time': 2},
+    {'time': 3, 'rate': 95},
+    {'rate': 94, 'time': 4},
+  ];
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   Future<List<Map<String, dynamic>>> getData() async {
     final DocumentSnapshot snapshot =
         await _db.collection("users data").doc(WhatUser.email).get();
-
+    WhatUser.username = snapshot['username'];
+    if (snapshot.exists == false) {
+      return h_R.cast<Map<String, dynamic>>();
+    }
     final List<dynamic> data = snapshot['Heart_Rate_Readings'];
+
     // final x = data as List<Map<String, dynamic>>;
     // print(x);
     return data.cast<Map<String, dynamic>>();
@@ -70,6 +81,20 @@ class GetReading {
 }
 
 class GetModelReading {
+  Map<String, dynamic> modelData = {
+    'chestpainType': 0,
+    'cholesterol': 0,
+    'exerciseAngina': 0,
+    'fastingBS': 0,
+    'maxHR': 0,
+    'oldpeak': 0,
+    'restingBP': 0,
+    'restingECG': 0,
+    'stSlope': 0,
+    'age': 0,
+    'sex': 0
+  };
+
   // String serachEmail;
   // GetReading({Key? key, required this.serachEmail});
   // final CollectionReference collectionReference = Firestore.instance.collection('your_collection_name');
@@ -77,8 +102,11 @@ class GetModelReading {
   Future<Map<String, dynamic>> getModelData() async {
     final DocumentSnapshot snapshot =
         await _db.collection("users data").doc(WhatUser.email).get();
-
+    Map<String, dynamic> dummyData = <String, dynamic>{'model_data': modelData};
     final data = snapshot['model_data'];
+    if (data == null) {
+      return dummyData;
+    }
     // final x = data as List<Map<String, dynamic>>;
     // print(x);
     return data;
