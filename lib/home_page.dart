@@ -100,13 +100,13 @@ class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text("TeleHealthCare",
-      //       style: TextStyle(
-      //           color: Colors.blueAccent, fontWeight: FontWeight.w800)),
-      //   backgroundColor: Colors.white,
-      //   centerTitle: true,
-      // ),
+      appBar: AppBar(
+        title: const Text(" ",
+            style:
+                TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.w800)),
+        backgroundColor: Colors.blue,
+        centerTitle: true,
+      ),
       body: IndexedStack(
         index: _currentIndex,
         children: <Widget>[

@@ -27,7 +27,8 @@ class _signup2State extends State<signup2> {
   String gender = "";
   String error = "";
   String phonenumber = "";
-
+  String gradine = "";
+  String gradineName = "";
   // String chestpainType = '';
   // String cholesterol = '';
   // String exerciseAngina = '';
@@ -141,6 +142,38 @@ class _signup2State extends State<signup2> {
                                     BorderRadius.all(Radius.circular(10)),
                               )),
                         ),
+                        Container(height: 15),
+                        TextFormField(
+                          keyboardType: TextInputType.number,
+                          validator: (val) =>
+                              val!.isEmpty ? "Please fill this textbox" : null,
+                          onChanged: (val) {
+                            setState(() => gradineName = val);
+                          },
+                          decoration: const InputDecoration(
+                              labelText: 'Gradine Name',
+                              icon: Icon(Icons.thumbs_up_down_outlined),
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                              )),
+                        ),
+                        Container(height: 15),
+                        TextFormField(
+                          keyboardType: TextInputType.number,
+                          validator: (val) =>
+                              val!.isEmpty ? "Please fill this textbox" : null,
+                          onChanged: (val) {
+                            setState(() => gradine = val);
+                          },
+                          decoration: const InputDecoration(
+                              labelText: 'Gradine Number',
+                              icon: Icon(Icons.thumbs_up_down_outlined),
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                              )),
+                        ),
                         // TextFormField(
                         //   keyboardType: TextInputType.number,
                         //   validator: (val) =>
@@ -248,7 +281,9 @@ class _signup2State extends State<signup2> {
                         widget.savedUser.dateofbirth,
                         cholestrollevel,
                         bloodpressaure,
-                        bloodsugar);
+                        bloodsugar,
+                        gradine,
+                        gradineName);
 
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const signin()));

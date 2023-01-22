@@ -263,34 +263,49 @@ class _registerState extends State<register> {
                           // ),
                           Container(height: 20),
                           Center(
-                            child: GenderPickerWithImage(
-                              showOtherGender: false,
-                              verticalAlignedText: false,
-                              selectedGender: Gender.Male,
-                              selectedGenderTextStyle: const TextStyle(
-                                  color: Color(0xFF8b32a8),
-                                  fontWeight: FontWeight.bold),
-                              unSelectedGenderTextStyle: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.normal),
-                              onChanged: (Gender? genderAvatar) {
-                                gender = genderAvatar.toString();
-                                if (gender == 'Gender.Male') {
-                                  gender = 'Male';
-                                } else {
-                                  gender = 'Female';
-                                }
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Pick a Gender',
+                                  style: TextStyle(
+                                      fontSize: 15, color: Colors.grey[600]),
+                                ),
+                                Container(
+                                  // decoration: BoxDecoration(
+                                  //     border: Border.all(color: Colors.grey),
+                                  //     borderRadius: BorderRadius.all(
+                                  //         Radius.circular(10))),
+                                  child: GenderPickerWithImage(
+                                    showOtherGender: false,
+                                    verticalAlignedText: false,
+                                    selectedGender: null,
+                                    selectedGenderTextStyle: const TextStyle(
+                                        color: Color(0xFF8b32a8),
+                                        fontWeight: FontWeight.bold),
+                                    unSelectedGenderTextStyle: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.normal),
+                                    onChanged: (Gender? genderAvatar) {
+                                      gender = genderAvatar.toString();
+                                      if (gender == 'Gender.Male') {
+                                        gender = 'Male';
+                                      } else {
+                                        gender = 'Female';
+                                      }
 
-                                print(gender);
-                              },
-                              equallyAligned: true,
-                              animationDuration:
-                                  const Duration(milliseconds: 300),
-                              isCircular: true,
-                              // default : true,
-                              opacityOfGradient: 0.4,
-                              padding: const EdgeInsets.all(3),
-                              size: 70, //default : 40
+                                      print(gender);
+                                    },
+                                    equallyAligned: false,
+                                    animationDuration:
+                                        const Duration(milliseconds: 300),
+                                    isCircular: true,
+                                    // default : true,
+                                    opacityOfGradient: 0.4,
+                                    padding: const EdgeInsets.all(3),
+                                    size: 100, //default : 40
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           // TextFormField(
