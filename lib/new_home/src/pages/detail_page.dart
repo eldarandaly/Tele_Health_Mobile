@@ -56,9 +56,9 @@ class _DetailPageState extends State<DetailPage> {
           children: <Widget>[
             Image.asset(model.image),
             DraggableScrollableSheet(
-              maxChildSize: .8,
-              initialChildSize: .6,
-              minChildSize: .6,
+              maxChildSize: .5,
+              initialChildSize: .4,
+              minChildSize: .2,
               builder: (context, scrollController) {
                 return Container(
                   height: AppTheme.fullHeight(context) * .5,
@@ -194,7 +194,7 @@ class _DetailPageState extends State<DetailPage> {
                               onPressed: () {},
                               child: Text(
                                 "Make an appointment",
-                                style: TextStyles.titleNormal.white,
+                                style: TextStyles.titleNormal,
                               ).p(10),
                             ),
                           ],

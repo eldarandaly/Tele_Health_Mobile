@@ -47,7 +47,8 @@ class DatabaseService {
       String bloodpressaure,
       String bloodsugar,
       String gradine,
-      String gradineName) async {
+      String gradineName,
+      bool isADoctor) async {
     Map<String, dynamic> ModelDAta = <String, dynamic>{'model_data': modelData};
     return await UserData.doc(uid).set({
       'email': email,
@@ -63,7 +64,8 @@ class DatabaseService {
       'model_data': modelData,
       'Heart_Rate_Readings': h_R,
       'gradine_Number': gradine,
-      'gradine_Name': gradineName
+      'gradine_Name': gradineName,
+      'isADoctor': isADoctor
     });
   }
 }

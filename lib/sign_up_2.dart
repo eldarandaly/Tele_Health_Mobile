@@ -29,6 +29,7 @@ class _signup2State extends State<signup2> {
   String phonenumber = "";
   String gradine = "";
   String gradineName = "";
+
   // String chestpainType = '';
   // String cholesterol = '';
   // String exerciseAngina = '';
@@ -144,7 +145,6 @@ class _signup2State extends State<signup2> {
                         ),
                         Container(height: 15),
                         TextFormField(
-                          keyboardType: TextInputType.number,
                           validator: (val) =>
                               val!.isEmpty ? "Please fill this textbox" : null,
                           onChanged: (val) {
@@ -283,7 +283,8 @@ class _signup2State extends State<signup2> {
                         bloodpressaure,
                         bloodsugar,
                         gradine,
-                        gradineName);
+                        gradineName,
+                        widget.savedUser.isAdoctor);
 
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const signin()));

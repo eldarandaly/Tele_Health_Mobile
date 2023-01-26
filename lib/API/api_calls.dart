@@ -65,10 +65,31 @@ class GetReading {
     {'rate': 94, 'time': 4},
   ];
   final FirebaseFirestore _db = FirebaseFirestore.instance;
+
   Future<List<Map<String, dynamic>>> getData() async {
     final DocumentSnapshot snapshot =
         await _db.collection("users data").doc(WhatUser.email).get();
     WhatUser.username = snapshot['username'];
+    WhatUser.isAdoctor = snapshot['isADoctor'];
+    WhatUser.gradine_name = snapshot['gradine_Name'];
+    WhatUser.gradine_num = snapshot['gradine_Number'];
+    if (snapshot.exists == false) {
+      return h_R.cast<Map<String, dynamic>>();
+    }
+    final List<dynamic> data = snapshot['Heart_Rate_Readings'];
+
+    // final x = data as List<Map<String, dynamic>>;
+    // print(x);
+    return data.cast<Map<String, dynamic>>();
+  }
+
+  Future<List<Map<String, dynamic>>> getAllCharts(String personEmail) async {
+    final DocumentSnapshot snapshot =
+        await _db.collection("users data").doc(personEmail).get();
+    WhatUser.username = snapshot['username'];
+    WhatUser.isAdoctor = snapshot['isADoctor'];
+    WhatUser.gradine_name = snapshot['gradine_Name'];
+    WhatUser.gradine_num = snapshot['gradine_Number'];
     if (snapshot.exists == false) {
       return h_R.cast<Map<String, dynamic>>();
     }

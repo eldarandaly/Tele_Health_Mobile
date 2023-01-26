@@ -1,7 +1,9 @@
 import 'dart:math';
+import 'package:telehealthcare/drawer/custom_drawer.dart';
 
 import 'package:flutter/material.dart';
 import 'package:telehealthcare/API/api_calls.dart';
+import 'package:telehealthcare/new_home/src/model/patient%20_model.dart';
 import 'package:telehealthcare/user_data.dart';
 import '../model/dactor_model.dart';
 import '../model/data.dart';
@@ -19,9 +21,12 @@ class CoolHomePage extends StatefulWidget {
 
 class _HomePageState extends State<CoolHomePage> {
   late List<DoctorModel> doctorDataList;
+  late List<PatientModel> patientDataList;
   @override
   void initState() {
     doctorDataList = doctorMapList.map((x) => DoctorModel.fromJson(x)).toList();
+    patientDataList =
+        patientMapList.map((x) => PatientModel.fromJson(x)).toList();
     super.initState();
   }
 
@@ -56,11 +61,12 @@ class _HomePageState extends State<CoolHomePage> {
   // }
 
   Widget _header() {
+    print(WhatUser.username);
     GetReading();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text("Hello,", style: TextStyles.title.subTitleColor),
+        Text("Hello ,", style: TextStyles.title.subTitleColor),
         Text(WhatUser.username, style: TextStyles.h1Style),
       ],
     ).p16;
@@ -92,7 +98,25 @@ class _HomePageState extends State<CoolHomePage> {
               width: 50,
               child: Icon(Icons.search, color: LightColor.purple)
                   .alignCenter
-                  .ripple(() {}, borderRadius: BorderRadius.circular(13))),
+                  .ripple(() {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text("Coming Soon"),
+                      content: Text(''),
+                      actions: <Widget>[
+                        ElevatedButton(
+                          child: const Text("OK"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }, borderRadius: BorderRadius.circular(13))),
         ),
       ),
     );
@@ -121,15 +145,15 @@ class _HomePageState extends State<CoolHomePage> {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: <Widget>[
-              _categoryCard("Heart Readings", " ",
+              _categoryCard("Heart Readings", "",
                   color: LightColor.green, lightColor: LightColor.lightGreen),
-              _categoryCard("Gradines", " ",
+              _categoryCard("Gradines", "",
                   color: LightColor.skyBlue, lightColor: LightColor.lightBlue),
-              _categoryCard("Doctors", " ",
+              _categoryCard("Doctors", "",
                   color: LightColor.orange, lightColor: LightColor.lightOrange),
-              _categoryCard("Suger Devices", " ",
+              _categoryCard("Suger Devices", "",
                   color: LightColor.green, lightColor: LightColor.lightGreen),
-              _categoryCard("ECG Readings", " ",
+              _categoryCard("ECG Readings", "",
                   color: LightColor.skyBlue, lightColor: LightColor.lightBlue)
             ],
           ),
@@ -153,13 +177,13 @@ class _HomePageState extends State<CoolHomePage> {
         width: AppTheme.fullWidth(context) * .3,
         margin: EdgeInsets.only(left: 10, right: 10, bottom: 20, top: 10),
         decoration: BoxDecoration(
-          color: color,
+          color: randomColor(),
           borderRadius: BorderRadius.all(Radius.circular(20)),
           boxShadow: <BoxShadow>[
             BoxShadow(
               offset: Offset(4, 4),
               blurRadius: 10,
-              color: lightColor!.withOpacity(.8),
+              color: randomColor().withOpacity(.8),
             )
           ],
         ),
@@ -172,7 +196,7 @@ class _HomePageState extends State<CoolHomePage> {
                   top: -20,
                   left: -20,
                   child: CircleAvatar(
-                    backgroundColor: lightColor,
+                    backgroundColor: randomColor(),
                     radius: 60,
                   ),
                 ),
@@ -182,10 +206,10 @@ class _HomePageState extends State<CoolHomePage> {
                     Flexible(
                       child: Text(title, style: titleStyle).hP8,
                     ),
-                    SizedBox(height: 10),
+                    // SizedBox(height: 10),
                     Flexible(
                       child: Text(
-                        subtitle,
+                        '',
                         style: subtitleStyle,
                       ).hP8,
                     ),
@@ -194,7 +218,25 @@ class _HomePageState extends State<CoolHomePage> {
               ],
             ),
           ),
-        ).ripple(() {}, borderRadius: BorderRadius.all(Radius.circular(20))),
+        ).ripple(() {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("Coming Soon"),
+                content: Text(subtitle),
+                actions: <Widget>[
+                  ElevatedButton(
+                    child: const Text("OK"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        }, borderRadius: BorderRadius.all(Radius.circular(20))),
       ),
     );
   }
@@ -206,13 +248,31 @@ class _HomePageState extends State<CoolHomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text("Top Engineers", style: TextStyles.title.bold),
+              Text("Doctors", style: TextStyles.title.bold),
               IconButton(
                   icon: Icon(
                     Icons.sort,
                     color: Theme.of(context).primaryColor,
                   ),
-                  onPressed: () {})
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text("Coming Soon"),
+                          content: Text(''),
+                          actions: <Widget>[
+                            ElevatedButton(
+                              child: const Text("OK"),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  })
               // .p(12).ripple(() {}, borderRadius: BorderRadius.all(Radius.circular(20))),
             ],
           ).hP16,
@@ -222,10 +282,58 @@ class _HomePageState extends State<CoolHomePage> {
     );
   }
 
+  Widget _patientList() {
+    return SliverList(
+      delegate: SliverChildListDelegate(
+        [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text("patient", style: TextStyles.title.bold),
+              IconButton(
+                  icon: Icon(
+                    Icons.sort,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text("Coming Soon"),
+                          content: Text(''),
+                          actions: <Widget>[
+                            ElevatedButton(
+                              child: const Text("OK"),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  })
+              // .p(12).ripple(() {}, borderRadius: BorderRadius.all(Radius.circular(20))),
+            ],
+          ).hP16,
+          getPatientList()
+        ],
+      ),
+    );
+  }
+
   Widget getdoctorWidgetList() {
     return Column(
         children: doctorDataList.map((x) {
       return _doctorTile(x);
+    }).toList());
+  }
+
+  Widget getPatientList() {
+    return Column(
+        children: patientDataList.map((x) {
+      return _patientTile(x);
     }).toList());
   }
 
@@ -255,16 +363,73 @@ class _HomePageState extends State<CoolHomePage> {
           leading: ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(13)),
             child: Container(
-              height: 55,
-              width: 55,
+              // height: 150,
+              // width: 100,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 color: randomColor(),
               ),
               child: Image.asset(
                 model.image,
-                height: 50,
-                width: 50,
+                // height: 200,
+                // width: 150,
+                fit: BoxFit.fitHeight,
+              ),
+            ),
+          ),
+          title: Text(model.name, style: TextStyles.title.bold),
+          subtitle: Text(
+            model.type,
+            style: TextStyles.bodySm.subTitleColor.bold,
+          ),
+          trailing: Icon(
+            Icons.keyboard_arrow_right,
+            size: 30,
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
+      ).ripple(() {
+        Navigator.pushNamed(context, "/DetailPage", arguments: model);
+      }, borderRadius: BorderRadius.all(Radius.circular(20))),
+    );
+  }
+
+  Widget _patientTile(PatientModel model) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            offset: Offset(4, 4),
+            blurRadius: 10,
+            color: LightColor.grey.withOpacity(.2),
+          ),
+          BoxShadow(
+            offset: Offset(-3, 0),
+            blurRadius: 15,
+            color: LightColor.grey.withOpacity(.1),
+          )
+        ],
+      ),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+        child: ListTile(
+          contentPadding: EdgeInsets.all(0),
+          leading: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(13)),
+            child: Container(
+              // height: 55,
+              // width: 55,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: randomColor(),
+              ),
+              child: Image.asset(
+                model.image,
+                // height: 50,
+                // width: 50,
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -308,35 +473,81 @@ class _HomePageState extends State<CoolHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Theme.of(context).backgroundColor,
-        leading: Icon(
-          Icons.short_text,
-          size: 30,
-          color: Colors.black,
-        ),
-        actions: <Widget>[
-          Icon(
-            Icons.notifications_none,
-            size: 30,
-            color: LightColor.grey,
-          ),
-          ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(13)),
-            child: Container(
-              // height: 40,
-              // width: 40,
-              decoration: BoxDecoration(
-                color: Theme.of(context).backgroundColor,
-              ),
-              child: Image.asset("assets/images/logo.png", fit: BoxFit.fill),
-            ),
-          ).p(8),
-        ],
-      ),
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   backgroundColor: Theme.of(context).backgroundColor,
+      //   leading: IconButton(
+      //     icon: Icon(Icons.short_text),
+      //     iconSize: 30,
+      //     color: Colors.black,
+      //     onPressed: () {
+      //       // showDialog(
+      //       //   context: context,
+      //       //   builder: (BuildContext context) {
+      //       //     return AlertDialog(
+      //       //       title: const Text("Coming Soon"),
+      //       //       content: Text(''),
+      //       //       actions: <Widget>[
+      //       //         ElevatedButton(
+      //       //           child: const Text("OK"),
+      //       //           onPressed: () {
+      //       //             Navigator.of(context).pop();
+      //       //           },
+      //       //         ),
+      //       //       ],
+      //       //     );
+      //       //   },
+      //       // );
+      //     },
+      //   ),
+      //   actions: <Widget>[
+      //     IconButton(
+      //       iconSize: 30,
+      //       color: LightColor.grey,
+      //       onPressed: () {
+      //         showDialog(
+      //           context: context,
+      //           builder: (BuildContext context) {
+      //             return AlertDialog(
+      //               title: const Text("Coming Soon"),
+      //               content: Text(''),
+      //               actions: <Widget>[
+      //                 ElevatedButton(
+      //                   child: const Text("OK"),
+      //                   onPressed: () {
+      //                     Navigator.of(context).pop();
+      //                   },
+      //                 ),
+      //               ],
+      //             );
+      //           },
+      //         );
+      //       },
+      //       icon: Icon(
+      //         Icons.notifications_none,
+      //       ),
+      //     ),
+      //     ClipRRect(
+      //       borderRadius: BorderRadius.all(Radius.circular(13)),
+      //       child: Container(
+      //         // height: 40,
+      //         // width: 40,
+      //         decoration: BoxDecoration(
+      //           color: Theme.of(context).backgroundColor,
+      //         ),
+      //         child: Image.asset("assets/images/logo.png", fit: BoxFit.fill),
+      //       ),
+      //     ).p(8),
+      //   ],
+      // ),
       backgroundColor: Theme.of(context).backgroundColor,
-      body: CustomScrollView(
+      body: showBody(),
+    );
+  }
+
+  CustomScrollView showBody() {
+    if (WhatUser.isAdoctor == false) {
+      return CustomScrollView(
         slivers: <Widget>[
           SliverList(
             delegate: SliverChildListDelegate(
@@ -349,7 +560,22 @@ class _HomePageState extends State<CoolHomePage> {
           ),
           _doctorsList()
         ],
-      ),
-    );
+      );
+    } else {
+      return CustomScrollView(
+        slivers: <Widget>[
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                _header(),
+                _searchField(),
+                _category(),
+              ],
+            ),
+          ),
+          _patientList()
+        ],
+      );
+    }
   }
 }

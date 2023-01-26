@@ -10,18 +10,19 @@ class DoctorModel {
   double satisfaction;
   bool isfavourite;
   String image;
+  dynamic rot;
 
-  DoctorModel({
-    required this.name,
-    required this.type,
-    required this.description,
-    required this.rating,
-    required this.goodReviews,
-    required this.totalScore,
-    required this.satisfaction,
-    required this.isfavourite,
-    required this.image,
-  });
+  DoctorModel(
+      {required this.name,
+      required this.type,
+      required this.description,
+      required this.rating,
+      required this.goodReviews,
+      required this.totalScore,
+      required this.satisfaction,
+      required this.isfavourite,
+      required this.image,
+      this.rot});
 
   DoctorModel copyWith({
     String? name,
@@ -65,6 +66,7 @@ class DoctorModel {
             : json["satisfaction"].toDouble(),
         isfavourite: json["isfavourite"] == null ? null : json["isfavourite"],
         image: json["image"] == null ? null : json["image"],
+        rot: json["rot"] == null ? null : json["rot"],
       );
 
   Map<String, dynamic> toJson() => {

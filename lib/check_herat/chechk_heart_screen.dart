@@ -1,7 +1,6 @@
-// ignore_for_file: library_private_types_in_public_api, non_constant_identifier_names
-
 import 'package:flutter/material.dart';
 import 'package:telehealthcare/API/api_calls.dart';
+import 'package:telehealthcare/drawer/custom_drawer.dart';
 import 'package:telehealthcare/new_home/src/theme/extention.dart';
 import 'package:telehealthcare/new_home/src/theme/light_color.dart';
 import 'package:telehealthcare/new_home/src/theme/text_styles.dart';
@@ -67,7 +66,7 @@ class _PredictPageState extends State<PredictPage> {
       });
     }
     if (_result == 'false') {
-      _result = 'Your herat is great';
+      _result = 'You R Safe';
       {
         showDialog(
           context: context,
@@ -464,7 +463,7 @@ class TestClass extends State<TestThisClass> {
       });
     }
     if (_result == 'false') {
-      _result = 'Your herat is great';
+      _result = 'You R Safe';
       {
         // showDialog(
         //   context: context,
@@ -535,6 +534,12 @@ class TestClass extends State<TestThisClass> {
 
   @override
   Widget build(BuildContext context) {
+    if (_result == "") {
+      CircularProgressIndicator(
+        backgroundColor: Colors.black,
+      );
+    }
+    ;
     return FutureBuilder<Map<String, dynamic>>(
       future: _getModelReading.getModelData(),
       builder: (context, snapshot) {
@@ -556,19 +561,19 @@ class TestClass extends State<TestThisClass> {
           oldPeak = modelData['Oldpeak'];
           stSlope = modelData['ST_Slope'];
           return Container(
-            color: Colors.grey[100],
+            color: Colors.blueGrey[100],
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
                   height: 310,
-                  width: 190,
+                  width: 200,
                   child: Column(
                     children: [
                       Container(
                         width: 200,
                         height: 200,
-                        child: _categoryCard("$_result", "",
+                        child: _categoryCard(_result, "",
                             color: LightColor.green,
                             lightColor: LightColor.lightGreen),
                       ),
@@ -576,9 +581,9 @@ class TestClass extends State<TestThisClass> {
                         onPressed: () {
                           _recivePreds();
                         },
-                        child: Text('Press To check'),
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blue),
+                        child: const Text('Press To check'),
                       ),
                     ],
                   ),
@@ -596,11 +601,15 @@ class TestClass extends State<TestThisClass> {
   }
 }
 
-Widget _categoryCard(String title, String subtitle,
-    {Color? color, Color? lightColor}) {
+Widget _categoryCard(
+  String title,
+  String subtitle, {
+  Color? color,
+  Color? lightColor,
+}) {
   TextStyle titleStyle = TextStyles.title.bold.white;
   TextStyle subtitleStyle = TextStyles.body.bold.white;
-
+  // TestClass t = TestClass();
   return AspectRatio(
     aspectRatio: 6 / 8,
     child: Container(
@@ -613,7 +622,7 @@ Widget _categoryCard(String title, String subtitle,
         boxShadow: <BoxShadow>[
           BoxShadow(
             offset: const Offset(4, 4),
-            blurRadius: 10,
+            blurRadius: 50,
             color: Colors.red[200]!.withOpacity(.8),
           )
         ],
@@ -627,6 +636,11 @@ Widget _categoryCard(String title, String subtitle,
                 top: -20,
                 left: -20,
                 child: CircleAvatar(
+                  child: Icon(
+                    Icons.favorite,
+                    size: 50,
+                    color: Colors.white,
+                  ),
                   backgroundColor: Colors.red[200],
                   radius: 60,
                 ),
@@ -634,10 +648,13 @@ Widget _categoryCard(String title, String subtitle,
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
+                  const SizedBox(
+                    height: 70,
+                    width: 500,
+                  ),
                   Flexible(
                     child: Text(title, style: titleStyle).hP8,
                   ),
-                  const SizedBox(height: 10),
                   Flexible(
                     child: Text(
                       subtitle,

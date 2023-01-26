@@ -9,6 +9,7 @@ import 'user_data.dart';
 import 'package:intl/intl.dart';
 import 'package:gender_picker/source/enums.dart';
 import 'package:gender_picker/source/gender_picker.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class register extends StatefulWidget {
   const register({Key? key}) : super(key: key);
@@ -32,13 +33,18 @@ class _registerState extends State<register> {
   String cholestrollevel = "";
   String bloodsugar = "";
   String bloodpressaure = "";
-
+  bool _isAdoctor = false;
   final AuthService _auth = new AuthService();
+  bool _passwordVisible = false;
+  bool _confirmPassVisible = false;
 
   @override
   void initState() {
     dateInput.text = ""; //set the initial value of text field
     super.initState();
+
+    bool _passwordVisible = false;
+    bool _confirmPassVisible = false;
   }
 
   @override
@@ -172,15 +178,28 @@ class _registerState extends State<register> {
                             onChanged: (val) {
                               setState(() => password = val);
                             },
-                            obscureText: true,
-                            decoration: const InputDecoration(
-                              labelText: 'Password',
-                              icon: Icon(Icons.password),
-                              border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                            ),
+                            obscureText: !_passwordVisible,
+                            decoration: InputDecoration(
+                                labelText: 'Password',
+                                icon: Icon(Icons.password),
+                                suffixIcon: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      _passwordVisible = !_passwordVisible;
+                                    });
+                                  },
+                                  icon: Icon(
+                                    // Based on passwordVisible state choose the icon
+                                    _passwordVisible
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: Theme.of(context).hintColor,
+                                  ),
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                )),
                           ),
                           Container(height: 20),
                           TextFormField(
@@ -190,16 +209,60 @@ class _registerState extends State<register> {
                             onChanged: (val) {
                               setState(() => confirmpassword = val);
                             },
-                            obscureText: true,
-                            decoration: const InputDecoration(
-                                labelText: 'Confirm Password',
+                            obscureText: !_confirmPassVisible,
+                            decoration: InputDecoration(
+                                labelText: 'confirm password',
                                 icon: Icon(Icons.password),
+                                suffixIcon: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      _confirmPassVisible =
+                                          !_confirmPassVisible;
+                                    });
+                                  },
+                                  icon: Icon(
+                                    // Based on passwordVisible state choose the icon
+                                    _confirmPassVisible
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: Theme.of(context).hintColor,
+                                  ),
+                                ),
                                 border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10)),
                                 )),
                           ),
                           Container(height: 20),
+                          Center(
+                            child: Row(
+                              children: [
+                                Text('Are You A Doctor'),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                ToggleSwitch(
+                                  initialLabelIndex: 0,
+                                  totalSwitches: 2,
+                                  labels: [
+                                    'Yes',
+                                    'No',
+                                  ],
+                                  onToggle: (index) {
+                                    // print('switched to: $index');
+                                    if (index == 0) {
+                                      _isAdoctor = true;
+                                    } else {
+                                      _isAdoctor = false;
+                                    }
+                                    print(_isAdoctor);
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(height: 20),
+
                           TextFormField(
                             keyboardType: TextInputType.number,
                             validator: (val) => val!.isEmpty
@@ -353,7 +416,8 @@ class _registerState extends State<register> {
                                             confirmpassword: confirmpassword,
                                             phonenumber: phonenumber,
                                             error: error,
-                                            gender: gender);
+                                            gender: gender,
+                                            isAdoctor: _isAdoctor);
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(

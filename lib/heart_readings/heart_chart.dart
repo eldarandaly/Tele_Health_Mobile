@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:charts_flutter/src/text_element.dart' show TextDirection;
+import 'package:telehealthcare/new_home/src/theme/text_styles.dart';
 
 import '../API/api_calls.dart';
 
@@ -17,8 +18,11 @@ class HeartRateChart extends StatelessWidget {
     return charts.LineChart(
       seriesList,
       animate: animate,
-      defaultRenderer:
-          charts.LineRendererConfig(includeArea: true, stacked: true),
+      defaultRenderer: charts.LineRendererConfig(
+          includeArea: false,
+          stacked: false,
+          strokeWidthPx: 3,
+          includePoints: true),
       behaviors: [
         charts.ChartTitle('Time',
             behaviorPosition: charts.BehaviorPosition.bottom,
@@ -93,6 +97,7 @@ class HeartRateSeries {
 //     );
 //   }
 // }
+
 class HeartRateLineChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -119,19 +124,104 @@ class HeartRateLineChart extends StatelessWidget {
           ];
 
           return Scaffold(
-            appBar: AppBar(
-              title: const Text("TeleHealthCare",
-                  style: TextStyle(
-                      color: Colors.blueAccent, fontWeight: FontWeight.w800)),
-              backgroundColor: Colors.white,
-              centerTitle: true,
-            ),
+            // appBar: AppBar(
+            //   title: const Text("TeleHealthCare",
+            //       style: TextStyle(
+            //           color: Colors.blueAccent, fontWeight: FontWeight.w800)),
+            //   backgroundColor: Colors.white,
+            //   centerTitle: true,
+            // ),
             body: Center(
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.8,
-                height: MediaQuery.of(context).size.height * 0.8,
-                child: Center(
-                  child: HeartRateChart(seriesList, animate: true),
+              child: SizedBox(
+                // height: 400,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Text(
+                        'Your Heart Rate Readings From The ECG Device',
+                        style: TextStyles.h1Style,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        height: MediaQuery.of(context).size.height * 0.8,
+                        child: Center(
+                          child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.blue),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: HeartRateChart(seriesList, animate: true)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return Text("Error: ${snapshot.error}");
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+  }
+}
+
+class AllHeartRateLineChart extends StatelessWidget {
+  final String personEmail;
+  const AllHeartRateLineChart({Key? key, required this.personEmail})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<Map<String, dynamic>>>(
+      future: GetReading().getAllCharts(personEmail),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final data = snapshot.data;
+
+          // map the data to the HeartRateSeries class
+          final myHeartRateData = data!
+              .map((e) => HeartRateSeries(e['time']!, e['rate']!))
+              .toList();
+
+          // create the series list
+          final seriesList = [
+            charts.Series<HeartRateSeries, int>(
+              id: 'HeartRate',
+              colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
+              domainFn: (HeartRateSeries hr, _) => hr.time,
+              measureFn: (HeartRateSeries hr, _) => hr.rate,
+              data: myHeartRateData,
+            ),
+          ];
+
+          return Scaffold(
+            // appBar: AppBar(
+            //   title: const Text("TeleHealthCare",
+            //       style: TextStyle(
+            //           color: Colors.blueAccent, fontWeight: FontWeight.w800)),
+            //   backgroundColor: Colors.white,
+            //   centerTitle: true,
+            // ),
+            body: Center(
+              child: SizedBox(
+                height: 500,
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  height: MediaQuery.of(context).size.height * 0.8,
+                  child: Center(
+                    child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blue),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: HeartRateChart(seriesList, animate: true)),
+                  ),
                 ),
               ),
             ),

@@ -31,96 +31,85 @@ class Body extends StatelessWidget {
                   return ListView.builder(
                     itemCount: snap.length,
                     itemBuilder: (context, index) {
-                      return Column(
-                        children: [
-                          // Column(
-                          //   children: [
-                          //     SizedBox(
-                          //       height: 11,
-                          //       width: 11,
-                          //       child: Stack(
-                          //         fit: StackFit.expand,
-                          //         clipBehavior: Clip.none,
-                          //       ),
-                          //     )
-                          //   ],
-                          // ),
-                          Column(
-                            children: [
-                              const Align(
-                                  alignment: Alignment.center,
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.white,
+                      return SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Align(
+                                alignment: Alignment.center,
+                                child: CircleAvatar(
+                                    backgroundColor: Colors.transparent,
                                     radius: 50,
-                                    backgroundImage:
-                                        AssetImage('assets/icons/logo.png'),
-                                  )),
-                              const SizedBox(
-                                height: 24,
-                              ),
-                              viewEmpData(snap, index, "Email", "email"),
-                              const SizedBox(
-                                height: 24,
-                              ),
-                              viewEmpData(snap, index, "username", "username"),
-                              const SizedBox(
-                                height: 24,
-                              ),
-                              viewEmpData(snap, index, "blood pressure",
-                                  "blood pressure"),
-                              const SizedBox(
-                                height: 24,
-                              ),
-                              viewEmpData(snap, index, "cholesterol",
-                                  "cholesterol level"),
-                              const SizedBox(
-                                height: 24,
-                              ),
-                              viewEmpData(snap, index, "Gender", "gender"),
-                              const SizedBox(
-                                height: 24,
-                              ),
-                              viewEmpData(snap, index, "Date of Brith",
-                                  "date of birth"),
-                              const SizedBox(
-                                height: 24,
-                              ),
-                              viewEmpData(
-                                  snap, index, "PhoneNumber", "phonenumber"),
-                              const SizedBox(
-                                height: 24,
-                              ),
-                              viewEmpData(
-                                  snap, index, "Gradine_Name", "gradine_Name"),
-                              const SizedBox(
-                                height: 24,
-                              ),
-                              viewEmpData(snap, index, "Gradine Number",
-                                  "gradine_Number"),
-                              const SizedBox(
-                                height: 24,
-                              ),
-                              const Divider(
-                                height: 3,
-                                thickness: 5,
-                                color: Colors.blue,
-                              ),
-                              const SizedBox(height: 24),
-                              viewModelData(
-                                  snap, index, 'RestingBP', 'RestingBP'),
-                              const SizedBox(height: 24),
-                              viewModelData(snap, index, 'ChestpainType',
-                                  'ChestpainType'),
-                              const SizedBox(height: 24),
-                              viewModelData(snap, index, 'ExerciseAngina',
-                                  'ExerciseAngina'),
-                              const SizedBox(height: 24),
-                              viewModelData(snap, index, 'MaxHR', 'MaxHR'),
-                              const SizedBox(height: 24),
-                              viewModelData(snap, index, 'Age', 'age'),
-                            ],
-                          ),
-                        ],
+                                    child:
+                                        Image.asset('assets/icons/logo.png'))),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            viewEmpData(snap, index, "Email", "email",
+                                Icons.email_outlined),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            viewEmpData(snap, index, "username", "username",
+                                Icons.alternate_email),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            viewEmpData(snap, index, "blood pressure",
+                                "blood pressure", Icons.bloodtype),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            viewEmpData(snap, index, "cholesterol",
+                                "cholesterol level", Icons.bloodtype),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            viewEmpData(
+                                snap, index, "Gender", "gender", Icons.male),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            viewEmpData(snap, index, "Date of Brith",
+                                "date of birth", Icons.date_range_outlined),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            viewEmpData(snap, index, "PhoneNumber",
+                                "phonenumber", Icons.phone),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            viewEmpData(snap, index, "Gradine_Name",
+                                "gradine_Name", Icons.shield),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            viewEmpData(snap, index, "Gradine Number",
+                                "gradine_Number", Icons.phone),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            const Divider(
+                              height: 3,
+                              thickness: 5,
+                              color: Colors.blue,
+                            ),
+                            const SizedBox(height: 24),
+                            viewModelData(
+                                snap, index, 'RestingBP', 'RestingBP'),
+                            const SizedBox(height: 24),
+                            viewModelData(
+                                snap, index, 'ChestpainType', 'ChestpainType'),
+                            const SizedBox(height: 24),
+                            viewModelData(snap, index, 'ExerciseAngina',
+                                'ExerciseAngina'),
+                            const SizedBox(height: 24),
+                            viewModelData(snap, index, 'MaxHR', 'MaxHR'),
+                            const SizedBox(height: 24),
+                            viewModelData(snap, index, 'Age', 'age'),
+                            const SizedBox(height: 200),
+                          ],
+                        ),
                       );
                     },
                   );
@@ -152,7 +141,7 @@ class Body extends StatelessWidget {
   // }
 
   TextFormField viewEmpData(List<QueryDocumentSnapshot<Object?>> snap,
-      int index, var title, String field) {
+      int index, var title, String field, dynamic viewIcon) {
     var see = snap[index][field];
     if (see == 'M' || see == 'm' || see == '1') {
       see = 'Male';
@@ -163,6 +152,7 @@ class Body extends StatelessWidget {
     return TextFormField(
       // enabled: false,
       decoration: InputDecoration(
+        icon: Icon(viewIcon),
         hintStyle: const TextStyle(
           color: Colors.blue,
           fontFamily: "Muli",
@@ -177,9 +167,9 @@ class Body extends StatelessWidget {
         labelText: title,
         enabled: false,
         hintText: see,
-        disabledBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-        ),
+        // disabledBorder: const OutlineInputBorder(
+        //   borderRadius: BorderRadius.all(Radius.circular(10)),
+        // ),
 
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly

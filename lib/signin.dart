@@ -9,6 +9,7 @@ import 'register.dart';
 import 'forget pass.dart';
 import 'sign_up_2.dart';
 import 'package:telehealthcare/home_page.dart';
+import 'package:flutter/services.dart';
 
 class signin extends StatefulWidget {
   const signin({Key? key}) : super(key: key);
@@ -23,9 +24,16 @@ class _signinState extends State<signin> {
   String email = "";
   String password = "";
   String error = "";
+  bool _passwordVisible = false;
   final AuthService _auth = new AuthService();
+  @override
+  void initState() {
+    super.initState();
+    _passwordVisible = false;
+  }
 
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return Scaffold(
       // appBar: AppBar(
       //   title: const Text("TeleHealthCare",
@@ -130,7 +138,8 @@ class _signinState extends State<signin> {
                           confirmpassword: 'confirmpassword',
                           phonenumber: 'phonenumber',
                           error: error,
-                          gender: 'gender');
+                          gender: 'gender',
+                          isAdoctor: false);
                     },
                     decoration: const InputDecoration(
                         labelText: 'Email',
@@ -146,15 +155,29 @@ class _signinState extends State<signin> {
                 child: SizedBox(
                   width: 300,
                   child: TextFormField(
+                    obscureText: !_passwordVisible,
                     validator: (val) =>
                         val!.isEmpty ? "Enter an password" : null,
                     onChanged: (val) {
                       setState(() => password = val);
                     },
-                    obscureText: true,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                         labelText: 'Password',
                         icon: Icon(Icons.password),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _passwordVisible = !_passwordVisible;
+                            });
+                          },
+                          icon: Icon(
+                            // Based on passwordVisible state choose the icon
+                            _passwordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Theme.of(context).hintColor,
+                          ),
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         )),
@@ -174,6 +197,7 @@ class _signinState extends State<signin> {
                         if (_formkey.currentState!.validate()) {
                           dynamic result = await _auth
                               .signinwithemailandpassword(email, password);
+                          print('------$result');
                           if (result == null) {
                             setState(() {
                               error = "please enter valid information";
@@ -218,19 +242,20 @@ class _signinState extends State<signin> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => HomePage(
-                                  u: MyUser(
-                                      email: email,
-                                      username: 'username',
-                                      password: password,
-                                      dateofbirth: 'dateofbirth',
-                                      bloodpressaure: 'bloodpressaure',
-                                      bloodsugar: 'bloodsugar',
-                                      cholestrollevel: 'cholestrollevel',
-                                      confirmpassword: 'confirmpassword',
-                                      phonenumber: 'phonenumber',
-                                      error: error,
-                                      gender: 'gender'),
-                                ),
+                                    // u: MyUser(
+                                    //     email: email,
+                                    //     username: 'username',
+                                    //     password: password,
+                                    //     dateofbirth: 'dateofbirth',
+                                    //     bloodpressaure: 'bloodpressaure',
+                                    //     bloodsugar: 'bloodsugar',
+                                    //     cholestrollevel: 'cholestrollevel',
+                                    //     confirmpassword: 'confirmpassword',
+                                    //     phonenumber: 'phonenumber',
+                                    //     error: error,
+                                    //     gender: 'gender',
+                                    //     isAdoctor: false),
+                                    ),
                               ),
                             ); // new page of sign in
                           }

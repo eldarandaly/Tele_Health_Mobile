@@ -10,6 +10,7 @@ class MyUser {
   final String cholestrollevel;
   final String bloodsugar;
   final String bloodpressaure;
+  final bool isAdoctor;
 
   MyUser(
       {required this.email,
@@ -22,7 +23,8 @@ class MyUser {
       required this.confirmpassword,
       required this.phonenumber,
       required this.error,
-      required this.gender});
+      required this.gender,
+      required this.isAdoctor});
 }
 
 class WhatUser {
@@ -38,4 +40,7 @@ class WhatUser {
   static String cholestrollevel = '';
   static String bloodsugar = '';
   static String bloodpressaure = '';
+  static bool isAdoctor = false;
+  static String gradine_name = '';
+  static String gradine_num = '';
 }

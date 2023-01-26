@@ -14,7 +14,7 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 4)).then((_) {
+    Future.delayed(Duration(seconds: 2)).then((_) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (_) => CoolHomePage()));
     });
@@ -41,8 +41,8 @@ class _SplashPageState extends State<SplashPage> {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                       colors: [
-                        Color.fromARGB(255, 235, 171, 171),
-                        Color.fromARGB(255, 119, 74, 74)
+                        Color.fromARGB(255, 255, 255, 255),
+                        Color.fromARGB(255, 43, 66, 106)
                       ],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
@@ -60,18 +60,18 @@ class _SplashPageState extends State<SplashPage> {
                 flex: 2,
                 child: SizedBox(),
               ),
-              Image.asset(
-                "assets/icons/icons8-heart-disease-64.png",
-                color: Colors.white,
-                height: 100,
-              ),
+              // Image.asset(
+              //   "assets/icons/icons8-heart-disease-64.png",
+              //   color: Colors.white,
+              //   height: 100,
+              // ),
               Text(
                 "Tele Health Care",
-                style: TextStyles.h1Style.white,
+                style: TextStyles.h1Style.black,
               ),
               Text(
                 "Senior Grad Project",
-                style: TextStyles.bodySm.white.bold,
+                style: TextStyles.bodySm.black.bold,
               ),
               Expanded(
                 flex: 7,

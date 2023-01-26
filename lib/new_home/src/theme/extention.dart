@@ -7,6 +7,7 @@ extension TextStyleHelpers on TextStyle {
   TextStyle get bold => copyWith(fontWeight: FontWeight.bold);
   TextStyle get white => copyWith(color: Colors.white);
   TextStyle get subTitleColor => copyWith(color: LightColor.subTitleTextColor);
+  TextStyle get black => copyWith(color: Colors.black);
 }
 
 extension PaddingHelper on Widget {

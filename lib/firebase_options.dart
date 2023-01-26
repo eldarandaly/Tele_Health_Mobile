@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -48,6 +45,17 @@ class DefaultFirebaseOptions {
         );
     }
   }
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAeVCKKckjVvpviCHsewNqrvJyvpUumYCw',
+    appId: '1:189488264527:web:18a784ab711d5519d5413a',
+    messagingSenderId: '189488264527',
+    projectId: 'telehealthserver',
+    authDomain: 'telehealthserver.firebaseapp.com',
+    databaseURL: 'https://telehealthserver-default-rtdb.europe-west1.firebasedatabase.app',
+    storageBucket: 'telehealthserver.appspot.com',
+    measurementId: 'G-BPCGWLP92C',
+  );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBOhXXD7ptdce6uGAEw_kfz6-8j6X2vFnU',

@@ -33,7 +33,8 @@ class _BodyState extends State<Body> {
   List splashData = [
     {
       "text": "Welcome To Tele Health Care",
-      "image": "assets/images/aast.png",
+      "image":
+          "assets/grapy-check-up-results-on-tablet-with-stethoscope-and-pills.png",
     },
     {
       "text": "this app will Heart Rate Reading",
@@ -82,16 +83,17 @@ class _BodyState extends State<Body> {
                     ),
                   ),
                   const Spacer(flex: 1),
-                  DefaultButton(
-                    text: "Login",
-                    press: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const signin()));
-                    },
-                  ),
-                  const Spacer(),
+                  // DefaultButton(
+                  //   text: "Lets go",
+                  //   press: () {
+                  //     Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (context) => const signin()));
+                  //   },
+                  // ),
+                  const Spacer(), showButton(currentPage),
+                  Spacer(),
                 ],
               ),
             ),
@@ -111,5 +113,21 @@ class _BodyState extends State<Body> {
           color: currentPage == index ? kPrimaryColor : const Color(0xFFD8D8D8),
           borderRadius: BorderRadius.circular(3)),
     );
+  }
+
+  Widget showButton(index) {
+    if (index == 2) {
+      return Container(
+        child: DefaultButton(
+          text: "Lets go",
+          press: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const signin()));
+          },
+        ),
+      );
+    } else {
+      return Container();
+    }
   }
 }

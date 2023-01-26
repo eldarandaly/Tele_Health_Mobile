@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:telehealthcare/API/api_calls.dart';
 import 'package:telehealthcare/check_herat/chechk_heart_screen.dart';
+import 'package:telehealthcare/drawer/custom_drawer.dart';
 import 'package:telehealthcare/sign_up_transition.dart';
 import 'package:telehealthcare/size_config.dart';
 import 'package:telehealthcare/user_data.dart';
@@ -21,8 +22,8 @@ final body = {
 Api api = Api();
 
 class HomePage extends StatelessWidget {
-  final MyUser u;
-  const HomePage({Key? key, required this.u}) : super(key: key);
+  // final MyUser u;
+  // const HomePage({Key? key, required this.u}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,9 +36,9 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class ApiPage extends StatelessWidget {
-  final String thisEmail;
-  ApiPage({Key? key, required this.thisEmail});
+class ProfilePageClass extends StatelessWidget {
+  // final String thisEmail;
+  // ProfilePageClass({Key? key, required this.thisEmail});
   @override
   Widget build(BuildContext context) {
     // FirebaseAPI d = FirebaseAPI(serachEmail: thisEmail);
@@ -51,35 +52,35 @@ class ApiPage extends StatelessWidget {
   }
 }
 
-class DisplayProfile extends StatelessWidget {
-  final List<String> texts;
+// class DisplayProfile extends StatelessWidget {
+//   final List<String> texts;
 
-  const DisplayProfile({required this.texts});
+//   const DisplayProfile({required this.texts});
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: List.generate(texts.length, (index) {
-        return Container(
-          child: Center(
-            child: Container(
-              margin: const EdgeInsets.all(20),
-              decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              child: Center(
-                child: Text(
-                  texts[index],
-                  style: const TextStyle(fontSize: 22),
-                ),
-              ),
-            ),
-          ),
-        );
-      }),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: List.generate(texts.length, (index) {
+//         return Container(
+//           child: Center(
+//             child: Container(
+//               margin: const EdgeInsets.all(20),
+//               decoration: const BoxDecoration(
+//                   color: Colors.white,
+//                   borderRadius: BorderRadius.all(Radius.circular(10))),
+//               child: Center(
+//                 child: Text(
+//                   texts[index],
+//                   style: const TextStyle(fontSize: 22),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         );
+//       }),
+//     );
+//   }
+// }
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -101,19 +102,21 @@ class _BottomBarState extends State<BottomBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(" ",
-            style:
-                TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.w800)),
+        leadingWidth: 50,
+        toolbarHeight: 100,
+        title: const Text("Tele Health",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
         backgroundColor: Colors.blue,
         centerTitle: true,
       ),
+      drawer: CustomDrawer(),
       body: IndexedStack(
         index: _currentIndex,
         children: <Widget>[
           Navigator(
             onGenerateRoute: (RouteSettings settings) {
               return MaterialPageRoute(
-                builder: (BuildContext context) => const PredictPage(),
+                builder: (BuildContext context) => new PredictPage(),
                 settings: settings,
               );
             },
@@ -121,7 +124,7 @@ class _BottomBarState extends State<BottomBar> {
           Navigator(
             onGenerateRoute: (RouteSettings settings) {
               return MaterialPageRoute(
-                builder: (BuildContext context) => const TestThisClass(),
+                builder: (BuildContext context) => new TestThisClass(),
                 settings: settings,
               );
             },
@@ -146,9 +149,7 @@ class _BottomBarState extends State<BottomBar> {
           Navigator(
             onGenerateRoute: (RouteSettings settings) {
               return MaterialPageRoute(
-                builder: (BuildContext context) => ApiPage(
-                  thisEmail: globleE,
-                ),
+                builder: (BuildContext context) => ProfilePageClass(),
                 settings: settings,
               );
             },
@@ -232,7 +233,7 @@ class _BottomBarState extends State<BottomBar> {
 //                   Navigator.push(
 //                     context,
 //                     MaterialPageRoute(
-//                         builder: (context) => ApiPage(
+//                         builder: (context) => ProfilePageClass(
 //                               thisEmail: u.email,
 //                             )),
 //                   );
