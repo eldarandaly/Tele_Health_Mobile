@@ -46,8 +46,10 @@ class Api {
         data: {"data": data});
 
     if (response.statusCode == 200) {
+      print(response.data);
       return response.data;
     } else {
+      print(response.data);
       throw Exception("Request failed with status: ${response.statusCode}.");
     }
   }
@@ -86,10 +88,10 @@ class GetReading {
   Future<List<Map<String, dynamic>>> getAllCharts(String personEmail) async {
     final DocumentSnapshot snapshot =
         await _db.collection("users data").doc(personEmail).get();
-    WhatUser.username = snapshot['username'];
-    WhatUser.isAdoctor = snapshot['isADoctor'];
-    WhatUser.gradine_name = snapshot['gradine_Name'];
-    WhatUser.gradine_num = snapshot['gradine_Number'];
+    // WhatUser.username = snapshot['username'];
+    // WhatUser.isAdoctor = snapshot['isADoctor'];
+    // WhatUser.gradine_name = snapshot['gradine_Name'];
+    // WhatUser.gradine_num = snapshot['gradine_Number'];
     if (snapshot.exists == false) {
       return h_R.cast<Map<String, dynamic>>();
     }

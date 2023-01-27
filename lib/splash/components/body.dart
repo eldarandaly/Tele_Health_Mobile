@@ -29,12 +29,14 @@ class _BodyState extends State<Body> {
     {
       "boldTitle": "Heart Disease Prediction",
     },
+    {
+      "boldTitle": "How to Place Device",
+    },
   ];
   List splashData = [
     {
       "text": "Welcome To Tele Health Care",
-      "image":
-          "assets/grapy-check-up-results-on-tablet-with-stethoscope-and-pills.png",
+      "image": "assets/icons/logo.png",
     },
     {
       "text": "this app will Heart Rate Reading",
@@ -44,12 +46,17 @@ class _BodyState extends State<Body> {
       "text": "Heart Disease Prediction Using AI",
       "image": "assets/images/heart.png",
     },
+    {
+      "text": "Follow This Steps",
+      "image": "assets/images/ECG-placement.jpg",
+    },
   ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: SizedBox(
         width: double.infinity,
+        height: 700,
         child: Column(children: <Widget>[
           Expanded(
             flex: 3,
@@ -67,8 +74,9 @@ class _BodyState extends State<Body> {
               ),
             ),
           ),
-          Expanded(
-            flex: 2,
+          SizedBox(
+            // flex: 2,
+            height: 200 - 44,
             child: Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: getProportionateScreenWidth(20)),
@@ -83,16 +91,8 @@ class _BodyState extends State<Body> {
                     ),
                   ),
                   const Spacer(flex: 1),
-                  // DefaultButton(
-                  //   text: "Lets go",
-                  //   press: () {
-                  //     Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(
-                  //             builder: (context) => const signin()));
-                  //   },
-                  // ),
-                  const Spacer(), showButton(currentPage),
+                  const Spacer(),
+                  showButton(currentPage),
                   Spacer(),
                 ],
               ),
@@ -116,7 +116,7 @@ class _BodyState extends State<Body> {
   }
 
   Widget showButton(index) {
-    if (index == 2) {
+    if (index == 3) {
       return Container(
         child: DefaultButton(
           text: "Lets go",

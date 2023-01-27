@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:telehealthcare/new_home/src/model/dactor_model.dart';
+import 'package:telehealthcare/new_home/src/model/patient%20_model.dart';
+import 'package:telehealthcare/new_home/src/pages/detail_page_patient.dart';
 import '../pages/detail_page.dart';
 import '../pages/new_home_page.dart';
 import '../pages/splash_page.dart';
@@ -26,7 +28,15 @@ class Routes {
                   model: settings.arguments as DoctorModel,
                   key: null,
                 ));
+      case "DetailPagePatient":
+        return CustomRoute<bool>(
+            settings: settings,
+            builder: (BuildContext context) => DetailPagePatient(
+                  model: settings.arguments as PatientModel,
+                  key: null,
+                ));
     }
+
     return null;
   }
 }

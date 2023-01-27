@@ -446,7 +446,7 @@ class _HomePageState extends State<CoolHomePage> {
           ),
         ),
       ).ripple(() {
-        Navigator.pushNamed(context, "/DetailPage", arguments: model);
+        Navigator.pushNamed(context, "/DetailPagePatient", arguments: model);
       }, borderRadius: BorderRadius.all(Radius.circular(20))),
     );
   }

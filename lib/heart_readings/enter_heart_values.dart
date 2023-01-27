@@ -15,25 +15,35 @@ class HeartReadingPage extends StatefulWidget {
 }
 
 class _HeartReadingPageState extends State<HeartReadingPage> {
-  List<int> _heartReadings = [
-    1,
-  ];
+  final fieldText = TextEditingController();
+  void clearText() {
+    fieldText.clear();
+  }
+
+  List<int> _heartReadings = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Heart Readings'),
-      ),
+      // appBar: AppBar(
+      //   title: Text('Heart Readings'),
+      // ),
       body: Column(
         children: <Widget>[
           Expanded(
             child: ListView.builder(
               itemCount: _heartReadings.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text('Reading ${index + 1}'),
-                  subtitle: Text(_heartReadings[index].toString() + ' BPM'),
+                return Card(
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.favorite,
+                      size: 50,
+                      color: Colors.red,
+                    ),
+                    title: Text('Reading ${index + 1}'),
+                    subtitle: Text(_heartReadings[index].toString() + ' BPM'),
+                  ),
                 );
               },
             ),
@@ -41,12 +51,15 @@ class _HeartReadingPageState extends State<HeartReadingPage> {
           Container(
             padding: EdgeInsets.all(16.0),
             child: TextField(
+              controller: fieldText,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: 'Enter heart reading',
               ),
               onSubmitted: (value) {
                 setState(() {
                   _heartReadings.add(int.parse(value));
+                  clearText();
                 });
               },
             ),

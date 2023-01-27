@@ -20,46 +20,66 @@ class _PredictPageState extends State<PredictPage> {
   final Api api = Api();
 
   String _result = "";
-  int Age = 0;
-  int Sex = 0;
-  int ChestpainType = 0;
-  int RestingBP = 0;
-  int Cholesterol = 0;
-  int FastingBS = 0;
-  int RestingECG = 0;
-  int MaxHR = 0;
-  int ExerciseAngina = 0;
-  int Oldpeak = 0;
-  int ST_Slope = 1;
+  int Age = -1;
+  int Sex = -1;
+  int ChestpainType = -1;
+  int RestingBP = -1;
+  int Cholesterol = -1;
+  int FastingBS = -1;
+  int RestingECG = -1;
+  int MaxHR = -1;
+  int ExerciseAngina = -1;
+  int Oldpeak = -1;
+  int ST_Slope = -1;
   void _getPrediction() async {
     try {
-      var response = await api.predict([
-        Age,
-        Sex,
-        ChestpainType,
-        RestingBP,
-        Cholesterol,
-        FastingBS,
-        RestingECG,
-        MaxHR,
-        ExerciseAngina,
-        Oldpeak,
-        ST_Slope
-      ]);
-      Age = 0;
-      Sex = 0;
-      ChestpainType = 0;
-      RestingBP = 0;
-      Cholesterol = 0;
-      FastingBS = 0;
-      RestingECG = 0;
-      MaxHR = 0;
-      ExerciseAngina = 0;
-      Oldpeak = 0;
-      ST_Slope = 1;
-      setState(() {
-        _result = response.toString();
-      });
+      if (Age == -1 ||
+          Sex == -1 ||
+          ChestpainType == -1 ||
+          RestingBP == -1 ||
+          Cholesterol == -1 ||
+          FastingBS == -1 ||
+          RestingECG == -1 ||
+          MaxHR == -1 ||
+          ExerciseAngina == -1 ||
+          Oldpeak == -1 ||
+          ST_Slope == -1) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Error"),
+              content: Text('Please Enter The Data'),
+              actions: <Widget>[
+                ElevatedButton(
+                  child: const Text("OK"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        var response = await api.predict([
+          Age,
+          Sex,
+          ChestpainType,
+          RestingBP,
+          Cholesterol,
+          FastingBS,
+          RestingECG,
+          MaxHR,
+          ExerciseAngina,
+          Oldpeak,
+          ST_Slope
+        ]);
+
+        setState(() {
+          _result = response.toString();
+        });
+      }
     } on Exception catch (e) {
       setState(() {
         _result = e.toString();
@@ -88,7 +108,7 @@ class _PredictPageState extends State<PredictPage> {
       }
     }
     if (_result == 'true') {
-      _result = 'Call 911 but not for me ';
+      _result = 'We will Call Your Doctor Now \n Your are near a Heart Attact ';
       {
         showDialog(
           context: context,
@@ -109,30 +129,30 @@ class _PredictPageState extends State<PredictPage> {
         );
       }
     }
-    if (Age == 0) {
-      if (_result == 'false') {
-        _result = 'Please enter The data';
-        {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text("Prediction Result"),
-                content: Text(_result),
-                actions: <Widget>[
-                  ElevatedButton(
-                    child: const Text("OK"),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              );
-            },
-          );
-        }
-      }
-    }
+    // if (Age == 0) {
+    //   if (_result == 'false') {
+    //     _result = 'Please enter The data';
+    //     {
+    //       showDialog(
+    //         context: context,
+    //         builder: (BuildContext context) {
+    //           return AlertDialog(
+    //             title: const Text("Prediction Result"),
+    //             content: Text(_result),
+    //             actions: <Widget>[
+    //               ElevatedButton(
+    //                 child: const Text("OK"),
+    //                 onPressed: () {
+    //                   Navigator.of(context).pop();
+    //                 },
+    //               ),
+    //             ],
+    //           );
+    //         },
+    //       );
+    //     }
+    //   }
+    // }
   }
 
   @override
@@ -144,43 +164,16 @@ class _PredictPageState extends State<PredictPage> {
       body: Center(
         child: SizedBox(
           width: 300,
-          child: ListView(
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'Age',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                  ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 20,
                 ),
-                validator: (val) {
-                  if (val!.isEmpty) {
-                    return "Enter Gender";
-                  }
-                  try {
-                    Age = int.parse(val);
-                  } catch (e) {
-                    return "Enter a valid number";
-                  }
-                  return null;
-                },
-                onChanged: (val) {
-                  setState(() {
-                    Age = int.parse(val);
-                  });
-                },
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
+                TextFormField(
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                    labelText: 'Gender',
+                    labelText: 'Age',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(10),
@@ -189,10 +182,10 @@ class _PredictPageState extends State<PredictPage> {
                   ),
                   validator: (val) {
                     if (val!.isEmpty) {
-                      return "Enter Gender";
+                      return "Enter Age";
                     }
                     try {
-                      Sex = int.parse(val);
+                      Age = int.parse(val);
                     } catch (e) {
                       return "Enter a valid number";
                     }
@@ -200,211 +193,294 @@ class _PredictPageState extends State<PredictPage> {
                   },
                   onChanged: (val) {
                     setState(() {
-                      Sex = int.parse(val);
+                      Age = int.parse(val);
                     });
-                  }),
-              const SizedBox(height: 20),
-              TextFormField(
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    labelText: 'ChestpainType',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
+                  },
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'Gender',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
                       ),
                     ),
-                  ),
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return "Enter ChestpainType";
-                    }
-                    try {
-                      ChestpainType = int.parse(val);
-                    } catch (e) {
-                      return "Enter a valid number";
-                    }
-                    return null;
-                  },
-                  onChanged: (val) {
-                    setState(() {
-                      ChestpainType = int.parse(val);
-                    });
-                  }),
-              const SizedBox(height: 20),
-              TextFormField(
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    labelText: 'RestingBP',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return "Enter Gender";
+                      }
+                      try {
+                        Sex = int.parse(val);
+                      } catch (e) {
+                        return "Enter a valid number";
+                      }
+                      return null;
+                    },
+                    onChanged: (val) {
+                      setState(() {
+                        Sex = int.parse(val);
+                      });
+                    }),
+                const SizedBox(height: 20),
+                TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'ChestpainType',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
                       ),
                     ),
-                  ),
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return "Enter RestingBP";
-                    }
-                    try {
-                      RestingBP = int.parse(val);
-                    } catch (e) {
-                      return "Enter a valid number";
-                    }
-                    return null;
-                  },
-                  onChanged: (val) {
-                    setState(() {
-                      RestingBP = int.parse(val);
-                    });
-                  }),
-              const SizedBox(height: 20),
-              TextFormField(
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    labelText: 'Cholesterol',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return "Enter ChestpainType";
+                      }
+                      try {
+                        ChestpainType = int.parse(val);
+                      } catch (e) {
+                        return "Enter a valid number";
+                      }
+                      return null;
+                    },
+                    onChanged: (val) {
+                      setState(() {
+                        ChestpainType = int.parse(val);
+                      });
+                    }),
+                const SizedBox(height: 20),
+                TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'RestingBP',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
                       ),
                     ),
-                  ),
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return "Enter Cholesterol";
-                    }
-                    try {
-                      Cholesterol = int.parse(val);
-                    } catch (e) {
-                      return "Enter a valid number";
-                    }
-                    return null;
-                  },
-                  onChanged: (val) {
-                    setState(() {
-                      Cholesterol = int.parse(val);
-                    });
-                  }),
-              const SizedBox(height: 20),
-              TextFormField(
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    labelText: 'FastingBS',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return "Enter RestingBP";
+                      }
+                      try {
+                        RestingBP = int.parse(val);
+                      } catch (e) {
+                        return "Enter a valid number";
+                      }
+                      return null;
+                    },
+                    onChanged: (val) {
+                      setState(() {
+                        RestingBP = int.parse(val);
+                      });
+                    }),
+                const SizedBox(height: 20),
+                TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'Cholesterol',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
                       ),
                     ),
-                  ),
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return "Enter FastingBS";
-                    }
-                    try {
-                      FastingBS = int.parse(val);
-                    } catch (e) {
-                      return "Enter a valid number";
-                    }
-                    return null;
-                  },
-                  onChanged: (val) {
-                    setState(() {
-                      FastingBS = int.parse(val);
-                    });
-                  }),
-              const SizedBox(height: 20),
-              TextFormField(
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    labelText: 'RestingECG',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return "Enter Cholesterol";
+                      }
+                      try {
+                        Cholesterol = int.parse(val);
+                      } catch (e) {
+                        return "Enter a valid number";
+                      }
+                      return null;
+                    },
+                    onChanged: (val) {
+                      setState(() {
+                        Cholesterol = int.parse(val);
+                      });
+                    }),
+                const SizedBox(height: 20),
+                TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'FastingBS',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
                       ),
                     ),
-                  ),
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return "Enter RestingECG";
-                    }
-                    try {
-                      RestingECG = int.parse(val);
-                    } catch (e) {
-                      return "Enter a valid number";
-                    }
-                    return null;
-                  },
-                  onChanged: (val) {
-                    setState(() {
-                      RestingECG = int.parse(val);
-                    });
-                  }),
-              const SizedBox(height: 20),
-              TextFormField(
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    labelText: 'MaxHR',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return "Enter FastingBS";
+                      }
+                      try {
+                        FastingBS = int.parse(val);
+                      } catch (e) {
+                        return "Enter a valid number";
+                      }
+                      return null;
+                    },
+                    onChanged: (val) {
+                      setState(() {
+                        FastingBS = int.parse(val);
+                      });
+                    }),
+                const SizedBox(height: 20),
+                TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'RestingECG',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
                       ),
                     ),
-                  ),
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return "Enter MaxHR";
-                    }
-                    try {
-                      MaxHR = int.parse(val);
-                    } catch (e) {
-                      return "Enter a valid number";
-                    }
-                    return null;
-                  },
-                  onChanged: (val) {
-                    setState(() {
-                      MaxHR = int.parse(val);
-                    });
-                  }),
-              const SizedBox(height: 20),
-              TextFormField(
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    labelText: 'ExerciseAngina',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return "Enter RestingECG";
+                      }
+                      try {
+                        RestingECG = int.parse(val);
+                      } catch (e) {
+                        return "Enter a valid number";
+                      }
+                      return null;
+                    },
+                    onChanged: (val) {
+                      setState(() {
+                        RestingECG = int.parse(val);
+                      });
+                    }),
+                const SizedBox(height: 20),
+                TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'MaxHR',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
                       ),
                     ),
-                  ),
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return "Enter ExerciseAngina";
-                    }
-                    try {
-                      ExerciseAngina = int.parse(val);
-                    } catch (e) {
-                      return "Enter a valid number";
-                    }
-                    return null;
-                  },
-                  onChanged: (val) {
-                    setState(() {
-                      ExerciseAngina = int.parse(val);
-                    });
-                  }),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _getPrediction,
-                child: const Text("Get Prediction"),
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50)),
-                    fixedSize: const Size.fromWidth(200.0),
-                    maximumSize: const Size.fromHeight(50.0),
-                    backgroundColor: Colors.blue),
-              ),
-              const SizedBox(height: 20),
-            ],
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return "Enter MaxHR";
+                      }
+                      try {
+                        MaxHR = int.parse(val);
+                      } catch (e) {
+                        return "Enter a valid number";
+                      }
+                      return null;
+                    },
+                    onChanged: (val) {
+                      setState(() {
+                        MaxHR = int.parse(val);
+                      });
+                    }),
+                const SizedBox(height: 20),
+                TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'ExerciseAngina',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                    ),
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return "Enter ExerciseAngina";
+                      }
+                      try {
+                        ExerciseAngina = int.parse(val);
+                      } catch (e) {
+                        return "Enter a valid number";
+                      }
+                      return null;
+                    },
+                    onChanged: (val) {
+                      setState(() {
+                        ExerciseAngina = int.parse(val);
+                      });
+                    }),
+                const SizedBox(height: 20),
+                TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'Old Peak',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                    ),
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return "Enter Old Peak";
+                      }
+                      try {
+                        ExerciseAngina = int.parse(val);
+                      } catch (e) {
+                        return "Enter a valid number";
+                      }
+                      return null;
+                    },
+                    onChanged: (val) {
+                      setState(() {
+                        Oldpeak = int.parse(val);
+                      });
+                    }),
+                const SizedBox(height: 20),
+                TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'St slope',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                    ),
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return "Enter St Slope";
+                      }
+                      try {
+                        ExerciseAngina = int.parse(val);
+                      } catch (e) {
+                        return "Enter a valid number";
+                      }
+                      return null;
+                    },
+                    onChanged: (val) {
+                      setState(() {
+                        ST_Slope = int.parse(val);
+                      });
+                    }),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: _getPrediction,
+                  child: const Text("Get Prediction"),
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50)),
+                      fixedSize: const Size.fromWidth(200.0),
+                      maximumSize: const Size.fromHeight(50.0),
+                      backgroundColor: Colors.blue),
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
           ),
         ),
       ),

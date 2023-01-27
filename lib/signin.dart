@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:telehealthcare/database.dart';
+import 'package:telehealthcare/new_home/src/theme/extention.dart';
+import 'package:telehealthcare/new_home/src/theme/text_styles.dart';
 import 'package:telehealthcare/seach_in_forget_pass.dart';
 import 'package:telehealthcare/sign_up_2.dart';
 import 'package:telehealthcare/sign_up_transition.dart';
@@ -33,7 +35,7 @@ class _signinState extends State<signin> {
   }
 
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return Scaffold(
       // appBar: AppBar(
       //   title: const Text("TeleHealthCare",
@@ -84,9 +86,18 @@ class _signinState extends State<signin> {
             width: 285.9,
             height: 150,
             fit: BoxFit.contain,
+            alignment: Alignment.topCenter,
           ),
         ),
-
+        SizedBox(
+          height: 30,
+        ),
+        Center(
+            child: Text(
+          '          Tele Health Care \n Now You are in safe hand',
+          style: TextStyle(
+              color: Colors.blue, fontWeight: FontWeight.w300, fontSize: 30),
+        )),
         Container(
             alignment: Alignment.bottomRight,
             child: IconButton(
@@ -313,27 +324,33 @@ class _signinState extends State<signin> {
                     //     style: TextStyle(color: Colors.white),
                     //   ),
                     // ),
+                    // TextButton(
+                    //     onPressed: () {
+                    //       Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //               builder: (context) => const forgetpass()));
+                    //     },
+                    //     child: const Text("Forget your password?",
+                    //         style: TextStyle(
+                    //             fontWeight: FontWeight.w800, fontSize: 15))),
+                    SizedBox(
+                      height: 10,
+                    ),
                     TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const forgetpass()));
-                        },
-                        child: const Text("Forget your password?",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w800, fontSize: 15))),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const register())); // transition
-                        },
-                        child: const Text("Create an account?",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w800, fontSize: 15))),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const register())); // transition
+                      },
+                      child: const Text(
+                        "Create an account?",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w800, fontSize: 20),
+                      ),
+                    ),
                   ],
                 ),
               )
