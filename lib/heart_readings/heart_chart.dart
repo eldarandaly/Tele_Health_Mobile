@@ -196,14 +196,24 @@ class AllHeartRateLineChart extends StatelessWidget {
                           border: Border.all(color: Colors.blue),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: HeartRateChart(seriesList, animate: true)),
+                        child: HeartRateChart(seriesList, animate: false)),
                   ),
                 ),
               ),
             ),
           );
         } else if (snapshot.hasError) {
-          return Text("Error: ${snapshot.error}");
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Please Tell The Paient To use There Place There Ecg Decive ",
+                style: TextStyles.h2Style,
+              ),
+              Divider(),
+              CircularProgressIndicator(),
+            ],
+          );
         } else {
           return const CircularProgressIndicator();
         }

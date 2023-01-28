@@ -116,6 +116,11 @@ class _BottomBarState extends State<BottomBar> {
                   TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
           backgroundColor: Colors.blue,
           centerTitle: true,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(30),
+            ),
+          ),
         ),
         drawer: CustomDrawer(),
         body: IndexedStack(
@@ -154,6 +159,7 @@ class _BottomBarState extends State<BottomBar> {
                 );
               },
             ),
+
             Navigator(
               onGenerateRoute: (RouteSettings settings) {
                 return MaterialPageRoute(
@@ -173,8 +179,8 @@ class _BottomBarState extends State<BottomBar> {
           },
           // ignore: prefer_const_literals_to_create_immutables
           items: [
-            const BottomNavigationBarItem(
-                icon: Icon(Icons.favorite), label: 'You check'),
+            // const BottomNavigationBarItem(
+            //     icon: Icon(Icons.favorite), label: 'You check'),
             // const BottomNavigationBarItem(
             //     icon: Icon(Icons.heart_broken), label: 'Heart.ai'),
             const BottomNavigationBarItem(

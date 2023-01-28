@@ -163,11 +163,16 @@ class _DoctorsOnlyPage extends State<DoctorsOnlyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 100,
+        toolbarHeight: 75,
         title: const Text("Tele Health",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
         backgroundColor: Colors.blue,
         centerTitle: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+          ),
+        ),
       ),
       // bottomNavigationBar: BottomNavigationBar(items: []),
       drawer: CustomDrawer(),

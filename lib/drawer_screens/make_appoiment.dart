@@ -39,6 +39,11 @@ class _MakeAAppoiment extends State<MakeAAppoiment> {
                   TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
           backgroundColor: Colors.blue,
           centerTitle: true,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(30),
+            ),
+          ),
         ),
         drawer: CustomDrawer(),
         body: Form(
