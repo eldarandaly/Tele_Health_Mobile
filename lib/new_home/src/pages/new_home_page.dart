@@ -220,23 +220,23 @@ class _HomePageState extends State<CoolHomePage> {
             ),
           ),
         ).ripple(() {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text("Coming Soon"),
-                content: Text(subtitle),
-                actions: <Widget>[
-                  ElevatedButton(
-                    child: const Text("OK"),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              );
-            },
-          );
+          // showDialog(
+          //   context: context,
+          //   builder: (BuildContext context) {
+          //     return AlertDialog(
+          //       title: const Text("Coming Soon"),
+          //       content: Text(subtitle),
+          //       actions: <Widget>[
+          //         ElevatedButton(
+          //           child: const Text("OK"),
+          //           onPressed: () {
+          //             Navigator.of(context).pop();
+          //           },
+          //         ),
+          //       ],
+          //     );
+          //   },
+          // );
         }, borderRadius: BorderRadius.all(Radius.circular(20))),
       ),
     );
@@ -256,23 +256,23 @@ class _HomePageState extends State<CoolHomePage> {
                     color: Theme.of(context).primaryColor,
                   ),
                   onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text("Coming Soon"),
-                          content: Text(''),
-                          actions: <Widget>[
-                            ElevatedButton(
-                              child: const Text("OK"),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
-                        );
-                      },
-                    );
+                    // showDialog(
+                    //   context: context,
+                    //   builder: (BuildContext context) {
+                    //     return AlertDialog(
+                    //       title: const Text("Coming Soon"),
+                    //       content: Text(''),
+                    //       actions: <Widget>[
+                    //         ElevatedButton(
+                    //           child: const Text("OK"),
+                    //           onPressed: () {
+                    //             Navigator.of(context).pop();
+                    //           },
+                    //         ),
+                    //       ],
+                    //     );
+                    //   },
+                    // );
                   })
               // .p(12).ripple(() {}, borderRadius: BorderRadius.all(Radius.circular(20))),
             ],
@@ -297,23 +297,23 @@ class _HomePageState extends State<CoolHomePage> {
                     color: Theme.of(context).primaryColor,
                   ),
                   onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text("Coming Soon"),
-                          content: Text(''),
-                          actions: <Widget>[
-                            ElevatedButton(
-                              child: const Text("OK"),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
-                        );
-                      },
-                    );
+                    // showDialog(
+                    //   context: context,
+                    //   builder: (BuildContext context) {
+                    //     return AlertDialog(
+                    //       title: const Text("Coming Soon"),
+                    //       content: Text(''),
+                    //       actions: <Widget>[
+                    //         ElevatedButton(
+                    //           child: const Text("OK"),
+                    //           onPressed: () {
+                    //             Navigator.of(context).pop();
+                    //           },
+                    //         ),
+                    //       ],
+                    //     );
+                    //   },
+                    // );
                   })
               // .p(12).ripple(() {}, borderRadius: BorderRadius.all(Radius.circular(20))),
             ],

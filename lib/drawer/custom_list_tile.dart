@@ -46,23 +46,23 @@ class CustomListTile extends StatelessWidget {
                           print('pressed');
                           print(x);
                           if (x == null) {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: const Text("Coming soon"),
-                                  content: Text(''),
-                                  actions: <Widget>[
-                                    ElevatedButton(
-                                      child: const Text("OK"),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
+                            // showDialog(
+                            //   context: context,
+                            //   builder: (BuildContext context) {
+                            //     return AlertDialog(
+                            //       title: const Text("Coming soon"),
+                            //       content: Text(''),
+                            //       actions: <Widget>[
+                            //         ElevatedButton(
+                            //           child: const Text("OK"),
+                            //           onPressed: () {
+                            //             Navigator.of(context).pop();
+                            //           },
+                            //         ),
+                            //       ],
+                            //     );
+                            //   },
+                            // );
                           } else {
                             Navigator.push(
                               context,
@@ -172,23 +172,23 @@ class CustomListTile extends StatelessWidget {
                           print('pressed');
                           print(x);
                           if (x == null) {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: const Text("Coming soon"),
-                                  content: Text(''),
-                                  actions: <Widget>[
-                                    ElevatedButton(
-                                      child: const Text("OK"),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
+                            // showDialog(
+                            //   context: context,
+                            //   builder: (BuildContext context) {
+                            //     return AlertDialog(
+                            //       title: const Text("Coming soon"),
+                            //       content: Text(''),
+                            //       actions: <Widget>[
+                            //         ElevatedButton(
+                            //           child: const Text("OK"),
+                            //           onPressed: () {
+                            //             Navigator.of(context).pop();
+                            //           },
+                            //         ),
+                            //       ],
+                            //     );
+                            //   },
+                            // );
                           } else {
                             Navigator.push(
                               context,
