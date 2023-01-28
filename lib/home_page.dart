@@ -192,14 +192,22 @@ class _BottomBarState extends State<BottomBar> {
       );
     } else {
       return Scaffold(
+        extendBodyBehindAppBar: true,
         appBar: AppBar(
           // leadingWidth: 50,
+
+          foregroundColor: Colors.black,
           toolbarHeight: 75,
           title: const Text("Tele Health",
               style:
                   TextStyle(color: Colors.black, fontWeight: FontWeight.w800)),
           backgroundColor: Colors.blue,
           centerTitle: true,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(30),
+            ),
+          ),
         ),
         drawer: CustomDrawer(),
         body: IndexedStack(
@@ -217,7 +225,7 @@ class _BottomBarState extends State<BottomBar> {
             Navigator(
               onGenerateRoute: (RouteSettings settings) {
                 return MaterialPageRoute(
-                  builder: (BuildContext context) => new TestThisClass(),
+                  builder: (BuildContext context) => TestThisClass(),
                   settings: settings,
                 );
               },

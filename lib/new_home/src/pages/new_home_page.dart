@@ -66,6 +66,7 @@ class _HomePageState extends State<CoolHomePage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+        SizedBox(height: 80),
         Text("Hello ,", style: TextStyles.title.subTitleColor),
         Text(WhatUser.username, style: TextStyles.h1Style),
       ],
@@ -98,25 +99,7 @@ class _HomePageState extends State<CoolHomePage> {
               width: 50,
               child: Icon(Icons.search, color: LightColor.purple)
                   .alignCenter
-                  .ripple(() {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text("Coming Soon"),
-                      content: Text(''),
-                      actions: <Widget>[
-                        ElevatedButton(
-                          child: const Text("OK"),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ],
-                    );
-                  },
-                );
-              }, borderRadius: BorderRadius.circular(13))),
+                  .ripple(() {}, borderRadius: BorderRadius.circular(13))),
         ),
       ),
     );

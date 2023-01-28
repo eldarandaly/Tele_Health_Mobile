@@ -86,7 +86,7 @@ class _PredictPageState extends State<PredictPage> {
       });
     }
     if (_result == 'false') {
-      _result = 'You R Safe';
+      _result = 'Safe';
       {
         showDialog(
           context: context,
@@ -539,9 +539,9 @@ class TestClass extends State<TestThisClass> {
       });
     }
     if (_result == 'false') {
-      _result = 'You R Safe';
+      _result = 'Safe';
     } else if (_result == 'true') {
-      _result = 'Call 911 but not for me ';
+      _result = 'Please Call Your Doctor';
     }
     if (age == 0) {
       if (_result == 'false') {
