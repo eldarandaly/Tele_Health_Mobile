@@ -10,116 +10,229 @@ class Body extends StatelessWidget {
   double screenWidth = 0;
   @override
   Widget build(BuildContext context) {
-    screenHeight = MediaQuery.of(context).size.height;
-    screenWidth = MediaQuery.of(context).size.width;
-    return Scaffold(
-      body: SingleChildScrollView(
-        // padding: EdgeInsets.all(2),
-        child: Container(
-          padding: const EdgeInsets.all(20),
-          alignment: Alignment.center,
-          height: screenHeight * 0.86,
-          child: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance
-                  .collection("users data")
-                  .where('email', isEqualTo: (WhatUser.email))
-                  .snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final snap = snapshot.data!.docs;
+    if (WhatUser.isAdoctor) {
+      screenHeight = MediaQuery.of(context).size.height;
+      screenWidth = MediaQuery.of(context).size.width;
+      return Scaffold(
+        body: SingleChildScrollView(
+          // padding: EdgeInsets.all(2),
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            alignment: Alignment.center,
+            height: screenHeight * 0.86,
+            child: StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection("users data")
+                    .where('email', isEqualTo: (WhatUser.email))
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    final snap = snapshot.data!.docs;
 
-                  return ListView.builder(
-                    itemCount: snap.length,
-                    itemBuilder: (context, index) {
-                      return SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Align(
-                                alignment: Alignment.center,
-                                child: CircleAvatar(
-                                    backgroundColor: Colors.transparent,
-                                    radius: 50,
-                                    child:
-                                        Image.asset('assets/icons/logo.png'))),
-                            const SizedBox(
-                              height: 24,
-                            ),
-                            viewEmpData(snap, index, "Email", "email",
-                                Icons.email_outlined),
-                            const SizedBox(
-                              height: 24,
-                            ),
-                            viewEmpData(snap, index, "username", "username",
-                                Icons.alternate_email),
-                            const SizedBox(
-                              height: 24,
-                            ),
-                            viewEmpData(snap, index, "blood pressure",
-                                "blood pressure", Icons.bloodtype),
-                            const SizedBox(
-                              height: 24,
-                            ),
-                            viewEmpData(snap, index, "cholesterol",
-                                "cholesterol level", Icons.bloodtype),
-                            const SizedBox(
-                              height: 24,
-                            ),
-                            viewEmpData(
-                                snap, index, "Gender", "gender", Icons.male),
-                            const SizedBox(
-                              height: 24,
-                            ),
-                            viewEmpData(snap, index, "Date of Brith",
-                                "date of birth", Icons.date_range_outlined),
-                            const SizedBox(
-                              height: 24,
-                            ),
-                            viewEmpData(snap, index, "PhoneNumber",
-                                "phonenumber", Icons.phone),
-                            const SizedBox(
-                              height: 24,
-                            ),
-                            viewEmpData(snap, index, "Gradine_Name",
-                                "gradine_Name", Icons.shield),
-                            const SizedBox(
-                              height: 24,
-                            ),
-                            viewEmpData(snap, index, "Gradine Number",
-                                "gradine_Number", Icons.phone),
-                            const SizedBox(
-                              height: 24,
-                            ),
-                            const Divider(
-                              height: 3,
-                              thickness: 5,
-                              color: Colors.blue,
-                            ),
-                            const SizedBox(height: 24),
-                            viewModelData(
-                                snap, index, 'RestingBP', 'RestingBP'),
-                            const SizedBox(height: 24),
-                            viewModelData(
-                                snap, index, 'ChestpainType', 'ChestpainType'),
-                            const SizedBox(height: 24),
-                            viewModelData(snap, index, 'ExerciseAngina',
-                                'ExerciseAngina'),
-                            const SizedBox(height: 24),
-                            viewModelData(snap, index, 'MaxHR', 'MaxHR'),
-                            const SizedBox(height: 24),
-                            viewModelData(snap, index, 'Age', 'age'),
-                            const SizedBox(height: 200),
-                          ],
-                        ),
-                      );
-                    },
-                  );
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              }),
+                    return ListView.builder(
+                      itemCount: snap.length,
+                      itemBuilder: (context, index) {
+                        return SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Align(
+                                  alignment: Alignment.center,
+                                  child: CircleAvatar(
+                                      backgroundColor: Colors.transparent,
+                                      radius: 50,
+                                      child: Image.asset(
+                                          'assets/icons/logo.png'))),
+                              const SizedBox(
+                                height: 24,
+                              ),
+                              viewEmpData(snap, index, "Email", "email",
+                                  Icons.email_outlined),
+                              const SizedBox(
+                                height: 24,
+                              ),
+                              viewEmpData(snap, index, "username", "username",
+                                  Icons.alternate_email),
+                              const SizedBox(
+                                height: 24,
+                              ),
+                              // viewEmpData(snap, index, "blood pressure",
+                              //     "blood pressure", Icons.bloodtype),
+                              // const SizedBox(
+                              //   height: 24,
+                              // ),
+                              // viewEmpData(snap, index, "cholesterol",
+                              //     "cholesterol level", Icons.bloodtype),
+                              // const SizedBox(
+                              //   height: 24,
+                              // ),
+                              viewEmpData(
+                                  snap, index, "Gender", "gender", Icons.male),
+                              const SizedBox(
+                                height: 24,
+                              ),
+                              viewEmpData(snap, index, "Date of Brith",
+                                  "date of birth", Icons.date_range_outlined),
+                              const SizedBox(
+                                height: 24,
+                              ),
+                              viewEmpData(snap, index, "PhoneNumber",
+                                  "phonenumber", Icons.phone),
+                              const SizedBox(
+                                height: 24,
+                              ),
+                              // viewEmpData(snap, index, "Gradine_Name",
+                              //     "gradine_Name", Icons.shield),
+                              // const SizedBox(
+                              //   height: 24,
+                              // ),
+                              // viewEmpData(snap, index, "Gradine Number",
+                              //     "gradine_Number", Icons.phone),
+                              // const SizedBox(
+                              //   height: 24,
+                              // ),
+                              // const Divider(
+                              //   height: 3,
+                              //   thickness: 5,
+                              //   color: Colors.blue,
+                              // ),
+                              // const SizedBox(height: 24),
+                              // viewModelData(
+                              //     snap, index, 'RestingBP', 'RestingBP'),
+                              // const SizedBox(height: 24),
+                              // viewModelData(
+                              //     snap, index, 'ChestpainType', 'ChestpainType'),
+                              // const SizedBox(height: 24),
+                              // viewModelData(snap, index, 'ExerciseAngina',
+                              //     'ExerciseAngina'),
+                              // const SizedBox(height: 24),
+                              // viewModelData(snap, index, 'MaxHR', 'MaxHR'),
+                              // const SizedBox(height: 24),
+                              // viewModelData(snap, index, 'Age', 'age'),
+                              // const SizedBox(height: 200),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                }),
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      screenHeight = MediaQuery.of(context).size.height;
+      screenWidth = MediaQuery.of(context).size.width;
+      return Scaffold(
+        body: SingleChildScrollView(
+          // padding: EdgeInsets.all(2),
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            alignment: Alignment.center,
+            height: screenHeight * 0.86,
+            child: StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection("users data")
+                    .where('email', isEqualTo: (WhatUser.email))
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    final snap = snapshot.data!.docs;
+
+                    return ListView.builder(
+                      itemCount: snap.length,
+                      itemBuilder: (context, index) {
+                        return SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Align(
+                                  alignment: Alignment.center,
+                                  child: CircleAvatar(
+                                      backgroundColor: Colors.transparent,
+                                      radius: 50,
+                                      child: Image.asset(
+                                          'assets/icons/logo.png'))),
+                              const SizedBox(
+                                height: 24,
+                              ),
+                              viewEmpData(snap, index, "Email", "email",
+                                  Icons.email_outlined),
+                              const SizedBox(
+                                height: 24,
+                              ),
+                              viewEmpData(snap, index, "username", "username",
+                                  Icons.alternate_email),
+                              const SizedBox(
+                                height: 24,
+                              ),
+                              viewEmpData(snap, index, "blood pressure",
+                                  "blood pressure", Icons.bloodtype),
+                              const SizedBox(
+                                height: 24,
+                              ),
+                              viewEmpData(snap, index, "cholesterol",
+                                  "cholesterol level", Icons.bloodtype),
+                              const SizedBox(
+                                height: 24,
+                              ),
+                              viewEmpData(
+                                  snap, index, "Gender", "gender", Icons.male),
+                              const SizedBox(
+                                height: 24,
+                              ),
+                              viewEmpData(snap, index, "Date of Brith",
+                                  "date of birth", Icons.date_range_outlined),
+                              const SizedBox(
+                                height: 24,
+                              ),
+                              viewEmpData(snap, index, "PhoneNumber",
+                                  "phonenumber", Icons.phone),
+                              const SizedBox(
+                                height: 24,
+                              ),
+                              viewEmpData(snap, index, "Gradine_Name",
+                                  "gradine_Name", Icons.shield),
+                              const SizedBox(
+                                height: 24,
+                              ),
+                              viewEmpData(snap, index, "Gradine Number",
+                                  "gradine_Number", Icons.phone),
+                              const SizedBox(
+                                height: 24,
+                              ),
+                              const Divider(
+                                height: 3,
+                                thickness: 5,
+                                color: Colors.blue,
+                              ),
+                              const SizedBox(height: 24),
+                              viewModelData(
+                                  snap, index, 'RestingBP', 'RestingBP'),
+                              const SizedBox(height: 24),
+                              viewModelData(snap, index, 'ChestpainType',
+                                  'ChestpainType'),
+                              const SizedBox(height: 24),
+                              viewModelData(snap, index, 'ExerciseAngina',
+                                  'ExerciseAngina'),
+                              const SizedBox(height: 24),
+                              viewModelData(snap, index, 'MaxHR', 'MaxHR'),
+                              const SizedBox(height: 24),
+                              viewModelData(snap, index, 'Age', 'age'),
+                              const SizedBox(height: 200),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                }),
+          ),
+        ),
+      );
+    }
   }
 
   // TextFormField viewEmpID() {

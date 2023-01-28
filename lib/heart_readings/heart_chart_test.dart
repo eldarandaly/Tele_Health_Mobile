@@ -23,17 +23,16 @@ class HeartRateChart2 extends StatelessWidget {
       defaultRenderer: charts.LineRendererConfig(
         includeArea: false,
         stacked: false,
-        strokeWidthPx: 3,
+        strokeWidthPx: 4,
         includePoints: false,
       ),
-      domainAxis: charts.NumericAxisSpec(
+      domainAxis: const charts.NumericAxisSpec(
         renderSpec: charts.NoneRenderSpec(),
-        viewport: charts.NumericExtents(0, 30),
+        viewport: charts.NumericExtents(0, 10),
       ),
       behaviors: [
         // charts.Slider(),
-        charts.SlidingViewport(),
-        charts.PanAndZoomBehavior(),
+
         charts.ChartTitle('Time',
             behaviorPosition: charts.BehaviorPosition.bottom,
             titleOutsideJustification:
@@ -45,7 +44,9 @@ class HeartRateChart2 extends StatelessWidget {
         charts.ChartTitle('',
             behaviorPosition: charts.BehaviorPosition.end,
             titleOutsideJustification:
-                charts.OutsideJustification.middleDrawArea)
+                charts.OutsideJustification.middleDrawArea),
+        charts.SlidingViewport(),
+        charts.PanAndZoomBehavior(),
       ],
     );
   }
@@ -77,7 +78,7 @@ class _HeartRateLineChartState extends State<HeartRateLineChart2> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return FutureBuilder<List<Map<String, dynamic>>>(
       future: GetReading().getEcgReading(),
       builder: (context, snapshot) {
