@@ -26,6 +26,13 @@ class DatabaseService {
     {'time': 3, 'rate': 95},
     {'rate': 94, 'time': 4},
   ];
+  List<Map<String, dynamic>> e_g = [
+    {'time': 0.5, 'rate': 1.2},
+    {'time': 1.0, 'rate': 1.25},
+    {'rate': 1.4, 'time': 2.0},
+    {'time': 2.5, 'rate': 1.24},
+    {'rate': 1.19, 'time': 3.0},
+  ];
   Future addUserModelData() async {
     Map<String, dynamic> data = <String, dynamic>{'model_data': modelData};
     return await UserData.doc(uid).set(data);
@@ -65,7 +72,8 @@ class DatabaseService {
       'Heart_Rate_Readings': h_R,
       'gradine_Number': gradine,
       'gradine_Name': gradineName,
-      'isADoctor': isADoctor
+      'isADoctor': isADoctor,
+      'Ecg_Readings': e_g
     });
   }
 }

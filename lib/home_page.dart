@@ -7,6 +7,7 @@ import 'package:telehealthcare/API/api_calls.dart';
 import 'package:telehealthcare/check_herat/chechk_heart_screen.dart';
 import 'package:telehealthcare/drawer/custom_drawer.dart';
 import 'package:telehealthcare/firebase_options.dart';
+import 'package:telehealthcare/heart_readings/heart_chart_test.dart';
 import 'package:telehealthcare/sign_up_transition.dart';
 import 'package:telehealthcare/size_config.dart';
 import 'package:telehealthcare/user_data.dart';
@@ -222,7 +223,7 @@ class _BottomBarState extends State<BottomBar> {
             Navigator(
               onGenerateRoute: (RouteSettings settings) {
                 return MaterialPageRoute(
-                  builder: (BuildContext context) => HeartReadingPage(),
+                  builder: (BuildContext context) => HeartRateLineChart(),
                   settings: settings,
                 );
               },
@@ -231,7 +232,7 @@ class _BottomBarState extends State<BottomBar> {
             Navigator(
               onGenerateRoute: (RouteSettings settings) {
                 return MaterialPageRoute(
-                  builder: (BuildContext context) => HeartRateLineChart(),
+                  builder: (BuildContext context) => HeartRateLineChart2(),
                   settings: settings,
                 );
               },
@@ -260,7 +261,7 @@ class _BottomBarState extends State<BottomBar> {
             const BottomNavigationBarItem(
                 icon: Icon(Icons.heart_broken), label: 'Heart.ai'),
             const BottomNavigationBarItem(
-                icon: Icon(Icons.edit_note_rounded), label: 'Readings'),
+                icon: Icon(Icons.monitor_heart), label: 'Readings'),
             const BottomNavigationBarItem(
                 icon: Icon(Icons.home), label: 'Home'),
             const BottomNavigationBarItem(

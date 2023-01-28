@@ -78,7 +78,7 @@ class GetReading {
     if (snapshot.exists == false) {
       return h_R.cast<Map<String, dynamic>>();
     }
-    final List<dynamic> data = snapshot['Heart_Rate_Readings'];
+    List<dynamic> data = snapshot['Heart_Rate_Readings'];
 
     // final x = data as List<Map<String, dynamic>>;
     // print(x);
@@ -96,6 +96,19 @@ class GetReading {
       return h_R.cast<Map<String, dynamic>>();
     }
     final List<dynamic> data = snapshot['Heart_Rate_Readings'];
+
+    // final x = data as List<Map<String, dynamic>>;
+    // print(x);
+    return data.cast<Map<String, dynamic>>();
+  }
+
+  Future<List<Map<String, dynamic>>> getEcgReading() async {
+    final DocumentSnapshot snapshot =
+        await _db.collection("users data").doc(WhatUser.email).get();
+    if (snapshot.exists == false) {
+      return h_R.cast<Map<String, dynamic>>();
+    }
+    List<dynamic> data = snapshot['Ecg_Readings'];
 
     // final x = data as List<Map<String, dynamic>>;
     // print(x);

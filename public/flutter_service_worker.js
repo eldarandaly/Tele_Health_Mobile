@@ -4,7 +4,7 @@ const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
   "404.html": "0a27a4163254fc8fce870c8cc3a3f94f",
-"assets/AssetManifest.json": "051ff02c1e73771430db2bd74e73c022",
+"assets/AssetManifest.json": "7e6edf4cc4da4acb204d72d868e44f6e",
 "assets/assets/abbas.jpg": "afb5094f533f6fd4217a2b95ef7ff5be",
 "assets/assets/abbas1.jpg": "725e02c2d1dd51211c3e8cd9d0d5d89d",
 "assets/assets/ahmed.png": "137dc5a2d95e246f93dea17a1ffd8557",
@@ -55,6 +55,8 @@ const RESOURCES = {
 "assets/assets/images/attendance.png": "7241e362e367f5b893d904bbc039dc5e",
 "assets/assets/images/check.png": "1a483cc6f3e389a4faa784bb7396173f",
 "assets/assets/images/doctor-with-stethoscope-listening-huge-heart-beat-ischemic-heart-disease.zip": "d58a1ba66ca17c1b594040b72b2963f4",
+"assets/assets/images/e73f6ef6": "63b1ec2badc663bc20384b156c31957f",
+"assets/assets/images/ECG-placement.jpg": "3b4ec09999ea9c92cc41811330cbb91b",
 "assets/assets/images/heart.png": "358cfdfa9656759c12b66e39ed1d30b3",
 "assets/assets/images/juicy-heart-with-cardiogram.png": "d3876b891ad2ed75da49f868be73540b",
 "assets/assets/images/logo.jpg": "63b1ec2badc663bc20384b156c31957f",
@@ -88,9 +90,9 @@ const RESOURCES = {
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
-"index.html": "20f77782a2ede8dfcf68260d3cafa58a",
-"/": "20f77782a2ede8dfcf68260d3cafa58a",
-"main.dart.js": "4777d61fc58f9209a7176eacc00526a1",
+"index.html": "4e21b96a4981d3f65657c22c27c10beb",
+"/": "4e21b96a4981d3f65657c22c27c10beb",
+"main.dart.js": "e381655cc44371b984ec5fc11eb246e3",
 "manifest.json": "f63a20af6a672cf093c1bcb2bba34af6",
 "version.json": "99430ff9bdc23dada1cda192958135d4"
 };
