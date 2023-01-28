@@ -198,9 +198,9 @@ TextFormField viewModelData(List<QueryDocumentSnapshot<Object?>> snap,
       labelText: title,
       enabled: false,
       hintText: snap[index]['model_data'][field].toString(),
-      disabledBorder: const OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-      ),
+      // disabledBorder: const OutlineInputBorder(
+      //   borderRadius: BorderRadius.all(Radius.circular(20)),
+      // ),
 
       // If  you are using latest version of flutter then lable text and hint text shown like this
       // if you r using flutter less then 1.20.* then maybe this is not working properly

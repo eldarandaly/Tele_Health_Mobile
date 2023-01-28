@@ -10,7 +10,7 @@ final doctorMapList = [
     "satisfaction": 95.2,
     "isfavourite": true,
     "image": "assets/ahmed.png",
-    "description": "الدرندلي واحد بس",
+    "description": " ",
     "email": 'ahmedmamdouh430@gmail.com'
   },
   {
@@ -22,7 +22,7 @@ final doctorMapList = [
     "satisfaction": 96,
     "isfavourite": true,
     "image": "assets/ibra.jpg",
-    "description": "Top ج",
+    "description": " ",
     "email": "IbrahimAmin@gmail.com"
   },
   {
@@ -33,8 +33,8 @@ final doctorMapList = [
     "totalScore": 69.420,
     "satisfaction": 69.420,
     "isfavourite": false,
-    "image": "assets/sami.png",
-    "description": "العلق",
+    "image": "assets/samy.jpg",
+    "description": " ",
     "email": "sami@gmail.com"
   },
   {
@@ -45,8 +45,8 @@ final doctorMapList = [
     "totalScore": 96,
     "satisfaction": 96,
     "isfavourite": true,
-    "image": "assets/bary.jpeg",
-    "description": "Top ج",
+    "image": "assets/bary1.jpg",
+    "description": " ",
   },
   {
     "name": "Dr.Mostafa Abbas",
@@ -56,8 +56,8 @@ final doctorMapList = [
     "totalScore": 96,
     "satisfaction": 96,
     "isfavourite": true,
-    "image": "assets/abbas.jpg",
-    "description": "Top ج",
+    "image": "assets/profile.jpg",
+    "description": " ",
   },
   {
     "name": "Dr.Abdelrhamn Hossam",
@@ -67,7 +67,7 @@ final doctorMapList = [
     "totalScore": 65,
     "satisfaction": 70,
     "isfavourite": true,
-    "image": "assets/doctor_1.png",
+    "image": "assets/profile.jpg",
     "description": " ",
   },
   {
@@ -78,7 +78,7 @@ final doctorMapList = [
     "totalScore": 65,
     "satisfaction": 70,
     "isfavourite": true,
-    "image": "assets/doctor_3.png",
+    "image": "assets/profile.jpg",
     "description": " ",
   },
 ];
@@ -103,7 +103,7 @@ final patientMapList = [
     "totalScore": 69.420,
     "satisfaction": 69.420,
     "isfavourite": false,
-    "image": "assets/sami.png",
+    "image": "assets/samy.jpg",
     "description": "Patient 2",
     "email": 'sami@gmail.com'
   },
@@ -127,7 +127,7 @@ final patientMapList = [
     "totalScore": 96,
     "satisfaction": 96,
     "isfavourite": true,
-    "image": "assets/bary.jpeg",
+    "image": "assets/bary1.jpg",
     "description": "Patient 4",
   },
   {
@@ -138,7 +138,7 @@ final patientMapList = [
     "totalScore": 96,
     "satisfaction": 96,
     "isfavourite": true,
-    "image": "assets/abbas.jpg",
+    "image": "assets/profile.jpg",
     "description": "Patient 5",
   },
   {
@@ -149,7 +149,7 @@ final patientMapList = [
     "totalScore": 65,
     "satisfaction": 70,
     "isfavourite": true,
-    "image": "assets/doctor_1.png",
+    "image": "assets/profile.jpg",
     "description": "Patient 6",
   },
   {
@@ -160,7 +160,7 @@ final patientMapList = [
     "totalScore": 65,
     "satisfaction": 70,
     "isfavourite": true,
-    "image": "assets/doctor_3.png",
+    "image": "assets/profile.jpg",
     "description": "Patient 7",
   },
 ];

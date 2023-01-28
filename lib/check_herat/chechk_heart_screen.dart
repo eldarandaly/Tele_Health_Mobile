@@ -540,70 +540,12 @@ class TestClass extends State<TestThisClass> {
     }
     if (_result == 'false') {
       _result = 'You R Safe';
-      {
-        // showDialog(
-        //   context: context,
-        //   builder: (BuildContext context) {
-        //     return AlertDialog(
-        //       title: const Text("Prediction Result"),
-        //       content: Text(_result),
-        //       actions: <Widget>[
-        //         ElevatedButton(
-        //           child: const Text("OK"),
-        //           onPressed: () {
-        //             Navigator.of(context).pop();
-        //           },
-        //         ),
-        //       ],
-        //     );
-        //   },
-        // );
-      }
-    }
-    if (_result == 'true') {
+    } else if (_result == 'true') {
       _result = 'Call 911 but not for me ';
-      {
-        // showDialog(
-        //   context: context,
-        //   builder: (BuildContext context) {
-        //     return AlertDialog(
-        //       title: const Text("Prediction Result"),
-        //       content: Text(_result),
-        //       actions: <Widget>[
-        //         ElevatedButton(
-        //           child: const Text("Call 911"),
-        //           onPressed: () {
-        //             Navigator.of(context).pop();
-        //           },
-        //         ),
-        //       ],
-        //     );
-        //   },
-        // );
-      }
     }
     if (age == 0) {
       if (_result == 'false') {
         _result = 'Please enter The data';
-        {
-          // showDialog(
-          //   context: context,
-          //   builder: (BuildContext context) {
-          //     return AlertDialog(
-          //       title: const Text("Prediction Result"),
-          //       content: Text(_result),
-          //       actions: <Widget>[
-          //         ElevatedButton(
-          //           child: const Text("OK"),
-          //           onPressed: () {
-          //             Navigator.of(context).pop();
-          //           },
-          //         ),
-          //       ],
-          //     );
-          //   },
-          // );
-        }
       }
     }
   }
@@ -637,7 +579,7 @@ class TestClass extends State<TestThisClass> {
           oldPeak = modelData['Oldpeak'];
           stSlope = modelData['ST_Slope'];
           return Container(
-            color: Colors.blueGrey[100],
+            color: Color.fromRGBO(18, 18, 18, 0.95),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -658,8 +600,11 @@ class TestClass extends State<TestThisClass> {
                           _recivePreds();
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue),
-                        child: const Text('Press To check'),
+                            backgroundColor: Colors.white),
+                        child: Text(
+                          'Press To check',
+                          style: TextStyles.body.black,
+                        ),
                       ),
                     ],
                   ),

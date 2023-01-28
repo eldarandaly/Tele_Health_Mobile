@@ -140,7 +140,7 @@ class _HomePageState extends State<CoolHomePage> {
           ),
         ),
         SizedBox(
-          height: AppTheme.fullHeight(context) * .3,
+          height: AppTheme.fullHeight(context) * .25,
           width: AppTheme.fullWidth(context) * 2,
           child: ListView(
             scrollDirection: Axis.horizontal,
@@ -164,7 +164,7 @@ class _HomePageState extends State<CoolHomePage> {
 
   Widget _categoryCard(String title, String subtitle,
       {Color? color, Color? lightColor}) {
-    TextStyle titleStyle = TextStyles.title.bold.white;
+    TextStyle titleStyle = TextStyles.body.bold.white;
     TextStyle subtitleStyle = TextStyles.body.bold.white;
     if (AppTheme.fullWidth(context) < 392) {
       titleStyle = TextStyles.body.bold.white;
@@ -177,13 +177,13 @@ class _HomePageState extends State<CoolHomePage> {
         width: AppTheme.fullWidth(context) * .3,
         margin: EdgeInsets.only(left: 10, right: 10, bottom: 20, top: 10),
         decoration: BoxDecoration(
-          color: randomColor(),
+          color: color,
           borderRadius: BorderRadius.all(Radius.circular(20)),
           boxShadow: <BoxShadow>[
             BoxShadow(
-              offset: Offset(4, 4),
+              offset: Offset(9, 9),
               blurRadius: 10,
-              color: randomColor().withOpacity(.8),
+              color: lightColor!.withOpacity(.8),
             )
           ],
         ),
@@ -196,7 +196,7 @@ class _HomePageState extends State<CoolHomePage> {
                   top: -20,
                   left: -20,
                   child: CircleAvatar(
-                    backgroundColor: randomColor(),
+                    backgroundColor: lightColor,
                     radius: 60,
                   ),
                 ),
@@ -204,7 +204,8 @@ class _HomePageState extends State<CoolHomePage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     Flexible(
-                      child: Text(title, style: titleStyle).hP8,
+                      // flex: 1,
+                      child: Text(title, style: titleStyle),
                     ),
                     // SizedBox(height: 10),
                     Flexible(

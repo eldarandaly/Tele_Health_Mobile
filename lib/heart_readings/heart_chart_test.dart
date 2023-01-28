@@ -1,18 +1,13 @@
-// ignore_for_file: unnecessary_new, no_logic_in_create_state, library_private_types_in_public_api
-
-import 'dart:ffi';
-import 'dart:math';
-
-import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:charts_flutter/src/text_element.dart' show TextDirection;
-import 'package:telehealthcare/new_home/src/theme/text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_charts/flutter_charts.dart';
+import 'package:flutter/services.dart';
+import 'package:telehealthcare/new_home/src/theme/extention.dart';
 import '../API/api_calls.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'dart:async';
+
+import '../new_home/src/theme/text_styles.dart';
 
 class HeartRateChart2 extends StatelessWidget {
   late List<charts.Series<dynamic, num>> seriesList;
@@ -26,11 +21,19 @@ class HeartRateChart2 extends StatelessWidget {
       seriesList,
       animate: animate,
       defaultRenderer: charts.LineRendererConfig(
-          includeArea: false,
-          stacked: false,
-          strokeWidthPx: 3,
-          includePoints: false),
+        includeArea: false,
+        stacked: false,
+        strokeWidthPx: 3,
+        includePoints: false,
+      ),
+      domainAxis: charts.NumericAxisSpec(
+        renderSpec: charts.NoneRenderSpec(),
+        viewport: charts.NumericExtents(0, 30),
+      ),
       behaviors: [
+        // charts.Slider(),
+        charts.SlidingViewport(),
+        charts.PanAndZoomBehavior(),
         charts.ChartTitle('Time',
             behaviorPosition: charts.BehaviorPosition.bottom,
             titleOutsideJustification:
@@ -74,12 +77,13 @@ class _HeartRateLineChartState extends State<HeartRateLineChart2> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return FutureBuilder<List<Map<String, dynamic>>>(
       future: GetReading().getEcgReading(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final data = snapshot.data;
-          final len = snapshot.data?.length;
+          // final len = snapshot.data?.length;
           // map the data to the HeartRateSeries class
           final myHeartRateData = data!
               .map((e) => HeartRateSeries(e['time']!, e['rate']!))
@@ -88,12 +92,12 @@ class _HeartRateLineChartState extends State<HeartRateLineChart2> {
           // create the series list
           final seriesList = [
             charts.Series<HeartRateSeries, num>(
-                id: 'HeartRate',
-                colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
-                domainFn: (HeartRateSeries hr, _) => hr.time,
-                measureFn: (HeartRateSeries hr, _) => hr.rate,
-                data: myHeartRateData,
-                fillColorFn: (_, __) => charts.MaterialPalette.black),
+              id: 'EcgSig',
+              colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
+              domainFn: (HeartRateSeries hr, _) => hr.time,
+              measureFn: (HeartRateSeries hr, _) => hr.rate,
+              data: myHeartRateData,
+            ),
           ];
 
           return Scaffold(
@@ -104,34 +108,58 @@ class _HeartRateLineChartState extends State<HeartRateLineChart2> {
             //   backgroundColor: Colors.white,
             //   centerTitle: true,
             // ),
-            body: Center(
-              child: SizedBox(
-                // height: 400,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Text('data'),
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        height: MediaQuery.of(context).size.height * 0.8,
-                        child: Center(
+            body: Container(
+              decoration: const BoxDecoration(
+                color: Color.fromRGBO(18, 18, 18, 0.95),
+                // border: Border.all(color: Colors.black),
+                // borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: SizedBox(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Text(
+                          'Ecg Readings',
+                          style: TextStyles.titleMedium.white,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
                           child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.blue),
-                              borderRadius: BorderRadius.circular(12),
+                            child: Center(
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.6,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.white),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child:
+                                    HeartRateChart2(seriesList, animate: false),
+                              ),
                             ),
-                            child: HeartRateChart2(seriesList, animate: false),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
           );
         } else if (snapshot.hasError) {
-          return Text("Error: ${snapshot.error}");
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Please use your Ecg Device to Mointor Your Ecg Signle ",
+                style: TextStyles.h2Style,
+              ),
+              Divider(),
+              CircularProgressIndicator(),
+            ],
+          );
         } else {
           return const CircularProgressIndicator();
         }

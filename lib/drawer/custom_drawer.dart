@@ -1,6 +1,7 @@
 import 'package:telehealthcare/drawer_screens/Patients_only_screen.dart';
 import 'package:telehealthcare/drawer_screens/doctors_only_page.dart';
 import 'package:telehealthcare/drawer_screens/gradines_page.dart';
+import 'package:telehealthcare/drawer_screens/how2use.dart';
 import 'package:telehealthcare/drawer_screens/see_patients_data.dart';
 import 'package:telehealthcare/heart_readings/heart_chart.dart';
 import 'package:telehealthcare/home_page.dart';
@@ -102,8 +103,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 CustomListTile(
                   isCollapsed: _isCollapsed,
                   icon: const Icon(Icons.settings),
-                  title: 'Settings',
+                  title: 'How to Use Ecg Device',
                   infoCount: 0,
+                  x: How2use(),
                 ),
                 const SizedBox(height: 10),
                 BottomUserInfo(isCollapsed: _isCollapsed),
@@ -207,9 +209,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 ),
                 CustomListTile(
                   isCollapsed: _isCollapsed,
-                  icon: const Icon(Icons.settings),
-                  title: 'Settings',
+                  icon: const Icon(Icons.help_sharp),
+                  title: 'How to Use Ecg Device',
                   infoCount: 0,
+                  x: How2use(),
                 ),
                 const SizedBox(height: 10),
                 BottomUserInfo(isCollapsed: _isCollapsed),

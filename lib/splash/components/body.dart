@@ -56,10 +56,10 @@ class _BodyState extends State<Body> {
     return SafeArea(
       child: SizedBox(
         width: double.infinity,
-        height: 700,
+        height: MediaQuery.of(context).size.height * 0.9,
         child: Column(children: <Widget>[
           Expanded(
-            flex: 3,
+            flex: 2,
             child: PageView.builder(
               onPageChanged: ((value) {
                 setState(() {
@@ -74,28 +74,25 @@ class _BodyState extends State<Body> {
               ),
             ),
           ),
-          SizedBox(
-            // flex: 2,
-            height: 200 - 44,
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: getProportionateScreenWidth(20)),
-              child: Column(
-                children: <Widget>[
-                  const Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                      splashData.length,
-                      (index) => buildDot(index: index),
-                    ),
+          Container(
+            height: 80,
+            child: Column(
+              children: <Widget>[
+                // const Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    splashData.length,
+                    (index) => buildDot(index: index),
                   ),
-                  const Spacer(flex: 1),
-                  const Spacer(),
-                  showButton(currentPage),
-                  Spacer(),
-                ],
-              ),
+                ),
+                // const Spacer(flex: 1),
+                SizedBox(
+                  height: 10,
+                ),
+                showButton(currentPage),
+                Spacer(),
+              ],
             ),
           ),
         ]),
@@ -118,6 +115,8 @@ class _BodyState extends State<Body> {
   Widget showButton(index) {
     if (index == 3) {
       return Container(
+        height: 50,
+        width: 300,
         child: DefaultButton(
           text: "Lets go",
           press: () {

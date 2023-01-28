@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:telehealthcare/new_home/src/theme/extention.dart';
+import 'package:telehealthcare/new_home/src/theme/text_styles.dart';
 import '../API/api_calls.dart';
 
 class HeartRateChart extends StatelessWidget {
@@ -20,6 +22,10 @@ class HeartRateChart extends StatelessWidget {
           stacked: false,
           strokeWidthPx: 3,
           includePoints: false),
+      domainAxis: const charts.NumericAxisSpec(
+        renderSpec: charts.NoneRenderSpec(),
+        viewport: charts.NumericExtents(0, 10),
+      ),
       behaviors: [
         charts.ChartTitle('Time',
             behaviorPosition: charts.BehaviorPosition.bottom,
@@ -32,7 +38,9 @@ class HeartRateChart extends StatelessWidget {
         charts.ChartTitle('Beats per Minute (BPM)',
             behaviorPosition: charts.BehaviorPosition.end,
             titleOutsideJustification:
-                charts.OutsideJustification.middleDrawArea)
+                charts.OutsideJustification.middleDrawArea),
+        charts.SlidingViewport(),
+        charts.PanAndZoomBehavior(),
       ],
     );
   }
@@ -87,34 +95,58 @@ class _HeartRateLineChartState extends State<HeartRateLineChart> {
           ];
 
           return Scaffold(
-            body: Center(
-              child: SizedBox(
-                // height: 400,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Text("Heart Rate"),
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        height: MediaQuery.of(context).size.height * 0.8,
-                        child: Center(
+            body: Container(
+              decoration: const BoxDecoration(
+                color: Color.fromRGBO(18, 18, 18, 0.95),
+                // border: Border.all(color: Colors.black),
+                // borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: SizedBox(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Text(
+                          'Heart Rate',
+                          style: TextStyles.titleMedium.white,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
                           child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.blue),
-                              borderRadius: BorderRadius.circular(12),
+                            child: Center(
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.6,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.white),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child:
+                                    HeartRateChart(seriesList, animate: false),
+                              ),
                             ),
-                            child: HeartRateChart(seriesList, animate: false),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
           );
         } else if (snapshot.hasError) {
-          return Text("Error: ${snapshot.error}");
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Please use your Ecg Device to Mointor Your Heart Rate Signle ",
+                style: TextStyles.h2Style,
+              ),
+              Divider(),
+              CircularProgressIndicator(),
+            ],
+          );
         } else {
           return const CircularProgressIndicator();
         }

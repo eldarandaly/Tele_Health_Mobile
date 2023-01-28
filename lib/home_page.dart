@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:telehealthcare/API/api_calls.dart';
@@ -46,9 +47,9 @@ class ProfilePageClass extends StatelessWidget {
     // FirebaseAPI d = FirebaseAPI(serachEmail: thisEmail);
     // d.getData();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile Page'),
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Profile Page'),
+      // ),
       body: Body(),
     );
   }
@@ -92,7 +93,7 @@ class BottomBar extends StatefulWidget {
 }
 
 class _BottomBarState extends State<BottomBar> {
-  int _currentIndex = 3;
+  int _currentIndex = 2;
   int _webCurrentIndex = 1;
 
   void _onItemTapped(int index) {
@@ -104,6 +105,7 @@ class _BottomBarState extends State<BottomBar> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     if (DefaultFirebaseOptions.currentPlatform == DefaultFirebaseOptions.web) {
       return Scaffold(
         appBar: AppBar(
@@ -191,11 +193,11 @@ class _BottomBarState extends State<BottomBar> {
     } else {
       return Scaffold(
         appBar: AppBar(
-          leadingWidth: 50,
-          toolbarHeight: 100,
+          // leadingWidth: 50,
+          toolbarHeight: 75,
           title: const Text("Tele Health",
               style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
+                  TextStyle(color: Colors.black, fontWeight: FontWeight.w800)),
           backgroundColor: Colors.blue,
           centerTitle: true,
         ),
@@ -203,15 +205,15 @@ class _BottomBarState extends State<BottomBar> {
         body: IndexedStack(
           index: _currentIndex,
           children: <Widget>[
-            Navigator(
-              onGenerateRoute: (RouteSettings settings) {
-                return MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      PredictPage(), //new ECGChart(),
-                  settings: settings,
-                );
-              },
-            ),
+            // Navigator(
+            //   onGenerateRoute: (RouteSettings settings) {
+            //     return MaterialPageRoute(
+            //       builder: (BuildContext context) =>
+            //           PredictPage(), //new ECGChart(),
+            //       settings: settings,
+            //     );
+            //   },
+            // ),
             Navigator(
               onGenerateRoute: (RouteSettings settings) {
                 return MaterialPageRoute(
@@ -256,16 +258,16 @@ class _BottomBarState extends State<BottomBar> {
           },
           // ignore: prefer_const_literals_to_create_immutables
           items: [
+            // const BottomNavigationBarItem(
+            //     icon: Icon(Icons.favorite), label: 'You check'),
             const BottomNavigationBarItem(
-                icon: Icon(Icons.favorite), label: 'You check'),
+                icon: Icon(Icons.heart_broken_outlined), label: 'Smart Check'),
             const BottomNavigationBarItem(
-                icon: Icon(Icons.heart_broken), label: 'Heart.ai'),
+                icon: Icon(Icons.favorite_border), label: 'Heart Readings'),
             const BottomNavigationBarItem(
-                icon: Icon(Icons.monitor_heart), label: 'Readings'),
+                icon: Icon(Icons.home_outlined), label: 'Home'),
             const BottomNavigationBarItem(
-                icon: Icon(Icons.home), label: 'Home'),
-            const BottomNavigationBarItem(
-                icon: Icon(Icons.monitor_heart_outlined), label: 'Chart'),
+                icon: Icon(Icons.monitor_heart_outlined), label: 'Ecg Chart'),
             const BottomNavigationBarItem(
                 icon: Icon(Icons.person_outline_sharp), label: 'Profile'),
           ],
