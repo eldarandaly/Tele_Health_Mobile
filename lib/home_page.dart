@@ -40,50 +40,13 @@ class HomePage extends StatelessWidget {
 }
 
 class ProfilePageClass extends StatelessWidget {
-  // final String thisEmail;
-  // ProfilePageClass({Key? key, required this.thisEmail});
   @override
   Widget build(BuildContext context) {
-    // FirebaseAPI d = FirebaseAPI(serachEmail: thisEmail);
-    // d.getData();
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Profile Page'),
-      // ),
       body: Body(),
     );
   }
 }
-
-// class DisplayProfile extends StatelessWidget {
-//   final List<String> texts;
-
-//   const DisplayProfile({required this.texts});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       children: List.generate(texts.length, (index) {
-//         return Container(
-//           child: Center(
-//             child: Container(
-//               margin: const EdgeInsets.all(20),
-//               decoration: const BoxDecoration(
-//                   color: Colors.white,
-//                   borderRadius: BorderRadius.all(Radius.circular(10))),
-//               child: Center(
-//                 child: Text(
-//                   texts[index],
-//                   style: const TextStyle(fontSize: 22),
-//                 ),
-//               ),
-//             ),
-//           ),
-//         );
-//       }),
-//     );
-//   }
-// }
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -108,12 +71,14 @@ class _BottomBarState extends State<BottomBar> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     if (DefaultFirebaseOptions.currentPlatform == DefaultFirebaseOptions.web) {
       return Scaffold(
+        extendBodyBehindAppBar: true,
         appBar: AppBar(
+          foregroundColor: Colors.black,
           leadingWidth: 50,
-          toolbarHeight: 100,
+          toolbarHeight: 75,
           title: const Text("Tele Health",
               style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
+                  TextStyle(color: Colors.black, fontWeight: FontWeight.w800)),
           backgroundColor: Colors.blue,
           centerTitle: true,
           shape: const RoundedRectangleBorder(
@@ -145,7 +110,7 @@ class _BottomBarState extends State<BottomBar> {
             Navigator(
               onGenerateRoute: (RouteSettings settings) {
                 return MaterialPageRoute(
-                  builder: (BuildContext context) => HeartReadingPage(),
+                  builder: (BuildContext context) => HeartRateLineChart(),
                   settings: settings,
                 );
               },
@@ -154,12 +119,11 @@ class _BottomBarState extends State<BottomBar> {
             Navigator(
               onGenerateRoute: (RouteSettings settings) {
                 return MaterialPageRoute(
-                  builder: (BuildContext context) => HeartRateLineChart(),
+                  builder: (BuildContext context) => HeartRateLineChart2(),
                   settings: settings,
                 );
               },
             ),
-
             Navigator(
               onGenerateRoute: (RouteSettings settings) {
                 return MaterialPageRoute(
@@ -184,11 +148,11 @@ class _BottomBarState extends State<BottomBar> {
             // const BottomNavigationBarItem(
             //     icon: Icon(Icons.heart_broken), label: 'Heart.ai'),
             const BottomNavigationBarItem(
-                icon: Icon(Icons.edit_note_rounded), label: 'Readings'),
+                icon: Icon(Icons.favorite_border), label: 'Heart Readings'),
             const BottomNavigationBarItem(
-                icon: Icon(Icons.home), label: 'Home'),
+                icon: Icon(Icons.home_outlined), label: 'Home'),
             const BottomNavigationBarItem(
-                icon: Icon(Icons.monitor_heart_outlined), label: 'Chart'),
+                icon: Icon(Icons.monitor_heart_outlined), label: 'Ecg Chart'),
             const BottomNavigationBarItem(
                 icon: Icon(Icons.person_outline_sharp), label: 'Profile'),
           ],

@@ -36,7 +36,7 @@ class _GradPage extends State<GradPage> {
           backgroundColor: Colors.blue,
           centerTitle: true,
         ),
-        drawer: CustomDrawer(),
+        drawer: const CustomDrawer(),
         body: Center(
           child: Container(
             width: 300,
@@ -53,20 +53,20 @@ class _GradPage extends State<GradPage> {
                     },
                     decoration: InputDecoration(
                         iconColor: Colors.black,
-                        hintStyle: TextStyle(
+                        hintStyle: const TextStyle(
                             fontFamily: "Muli",
                             fontSize: 22,
                             color: Colors.black),
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.shield,
                           color: Colors.black,
                         ),
                         hintText: (WhatUser.gradine_name),
-                        border: OutlineInputBorder(
+                        border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         )),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   TextFormField(
@@ -76,16 +76,16 @@ class _GradPage extends State<GradPage> {
                       setState(() => name = val);
                     },
                     decoration: InputDecoration(
-                        hintStyle: TextStyle(
+                        hintStyle: const TextStyle(
                             fontFamily: "Muli",
                             fontSize: 22,
                             color: Colors.black),
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.phone,
                           color: Colors.black,
                         ),
                         hintText: (WhatUser.gradine_num),
-                        border: OutlineInputBorder(
+                        border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         )),
                   ),
@@ -98,7 +98,7 @@ class _GradPage extends State<GradPage> {
                           // Do something with the entered text
                         }
                       },
-                      child: Text("Need Help !"),
+                      child: const Text("Need Help !"),
                     ),
                   )
                 ],

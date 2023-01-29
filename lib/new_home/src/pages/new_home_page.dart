@@ -130,7 +130,7 @@ class _HomePageState extends State<CoolHomePage> {
             children: <Widget>[
               _categoryCard("Heart Readings", "",
                   color: LightColor.green, lightColor: LightColor.lightGreen),
-              _categoryCard("Gradines", "",
+              _categoryCard("Guardian ", "",
                   color: LightColor.skyBlue, lightColor: LightColor.lightBlue),
               _categoryCard("Doctors", "",
                   color: LightColor.orange, lightColor: LightColor.lightOrange),

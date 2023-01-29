@@ -32,13 +32,19 @@ class _How2use extends State<How2use> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        extendBodyBehindAppBar: true,
         appBar: AppBar(
-          toolbarHeight: 100,
+          toolbarHeight: 75,
           title: const Text("Tele Health",
               style:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
           backgroundColor: Colors.blue,
           centerTitle: true,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(30),
+            ),
+          ),
         ),
         drawer: CustomDrawer(),
         body: Form(
@@ -61,11 +67,13 @@ class _How2use extends State<How2use> {
                 SizedBox(
                   height: 20,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'using this figure will help you place the Sensors on your Body',
-                    style: TextStyles.titleNormal,
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'using this figure will help you place the Sensors on your Body',
+                      style: TextStyles.titleNormal,
+                    ),
                   ),
                 ),
                 Container(

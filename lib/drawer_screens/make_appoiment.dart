@@ -33,10 +33,11 @@ class _MakeAAppoiment extends State<MakeAAppoiment> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          foregroundColor: Colors.black,
           toolbarHeight: 100,
           title: const Text("Tele Health",
               style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
+                  TextStyle(color: Colors.black, fontWeight: FontWeight.w800)),
           backgroundColor: Colors.blue,
           centerTitle: true,
           shape: const RoundedRectangleBorder(
