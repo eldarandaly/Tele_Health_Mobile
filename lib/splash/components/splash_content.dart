@@ -16,24 +16,26 @@ class SplashContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // print("gtgtrg " + headtitle);
-    return Column(children: <Widget>[
-      const Spacer(),
-      Text(
-        headtitle,
-        style: TextStyle(
-          fontSize: getProportionateScreenWidth(32),
-          color: kPrimaryColor,
-          fontWeight: FontWeight.bold,
+    return Container(
+      child: Column(children: <Widget>[
+        const Spacer(),
+        Text(
+          headtitle,
+          style: TextStyle(
+            fontSize: getProportionateScreenWidth(32),
+            color: kPrimaryColor,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-      ),
-      Text(text),
-      const Spacer(flex: 1),
-      Image.asset(
-        image,
-        height: getProportionateScreenHeight(265 * 2),
-        width: getProportionateScreenWidth(235 * 2),
-        // scale: 0.02,
-      ),
-    ]);
+        Text(text),
+        const Spacer(flex: 1),
+        Image.asset(
+          image,
+          height: getProportionateScreenHeight(265 * 2),
+          width: getProportionateScreenWidth(235 * 2),
+          // scale: 0.02,
+        ),
+      ]),
+    );
   }
 }
