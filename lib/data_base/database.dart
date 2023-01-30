@@ -33,6 +33,13 @@ class DatabaseService {
     {'time': 2.5, 'rate': 1.24},
     {'rate': 1.19, 'time': 3.0},
   ];
+  List<Map<String, dynamic>> m_p = [
+    {
+      'ptd_result': false,
+      'arrhy_result': 'Supra-ventricular',
+      'rand_result': false
+    }
+  ];
   Future addUserModelData() async {
     Map<String, dynamic> data = <String, dynamic>{'model_data': modelData};
     return await UserData.doc(uid).set(data);
@@ -73,7 +80,8 @@ class DatabaseService {
       'gradine_Number': gradine,
       'gradine_Name': gradineName,
       'isADoctor': isADoctor,
-      'Ecg_Readings': e_g
+      'Ecg_Readings': e_g,
+      'Models_Predict': m_p
     });
   }
 }
