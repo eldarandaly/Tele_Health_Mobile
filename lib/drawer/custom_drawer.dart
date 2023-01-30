@@ -4,9 +4,9 @@ import 'package:telehealthcare/drawer_screens/gradines_page.dart';
 import 'package:telehealthcare/drawer_screens/how2use.dart';
 import 'package:telehealthcare/drawer_screens/see_patients_data.dart';
 import 'package:telehealthcare/heart_readings/heart_chart.dart';
-import 'package:telehealthcare/home_page.dart';
-import 'package:telehealthcare/new_home/home_main.dart';
-import 'package:telehealthcare/signin.dart';
+import 'package:telehealthcare/home/home_page.dart';
+import 'package:telehealthcare/bottom_bar_nav/home_main.dart';
+import 'package:telehealthcare/sign_in/signin.dart';
 import 'package:telehealthcare/user_data.dart';
 
 import './bottom_user_info.dart';

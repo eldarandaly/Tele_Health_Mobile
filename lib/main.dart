@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'firebase_options.dart';
-import 'signin.dart';
+import 'sign_in/signin.dart';
 import 'package:telehealthcare/splash/splash_screen.dart';
 
 void main() async {

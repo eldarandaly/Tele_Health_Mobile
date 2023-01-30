@@ -1,24 +1,24 @@
 import 'package:telehealthcare/drawer/custom_drawer.dart';
 import 'package:telehealthcare/drawer_screens/make_appoiment.dart';
 import 'package:telehealthcare/heart_readings/heart_chart.dart';
-import 'package:telehealthcare/home_page.dart';
-import 'package:telehealthcare/new_home/home_main.dart';
-import 'package:telehealthcare/signin.dart';
+import 'package:telehealthcare/home/home_page.dart';
+import 'package:telehealthcare/bottom_bar_nav/home_main.dart';
+import 'package:telehealthcare/sign_in/signin.dart';
 import 'package:telehealthcare/user_data.dart';
 import 'dart:math';
 import 'package:telehealthcare/drawer/custom_drawer.dart';
 
 import 'package:flutter/material.dart';
 import 'package:telehealthcare/API/api_calls.dart';
-import 'package:telehealthcare/new_home/src/model/patient%20_model.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/model/patient%20_model.dart';
 import 'package:telehealthcare/user_data.dart';
-import 'package:telehealthcare/new_home/src/model/dactor_model.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/model/dactor_model.dart';
 
-import 'package:telehealthcare/new_home/src/model/data.dart';
-import 'package:telehealthcare/new_home/src/theme/extention.dart';
-import 'package:telehealthcare/new_home/src/theme/light_color.dart';
-import 'package:telehealthcare/new_home/src/theme/text_styles.dart';
-import 'package:telehealthcare/new_home/src/theme/theme.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/model/data.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/theme/extention.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/theme/light_color.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/theme/text_styles.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class PatientsPageDraw extends StatefulWidget {

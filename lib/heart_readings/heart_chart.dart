@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:telehealthcare/new_home/src/theme/extention.dart';
-import 'package:telehealthcare/new_home/src/theme/text_styles.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/theme/extention.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/theme/text_styles.dart';
 import '../API/api_calls.dart';
 
 class HeartRateChart extends StatelessWidget {

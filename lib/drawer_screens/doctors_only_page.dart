@@ -4,13 +4,13 @@ import 'dart:math';
 import 'package:telehealthcare/drawer/custom_drawer.dart';
 
 import 'package:flutter/material.dart';
-import 'package:telehealthcare/new_home/src/model/patient%20_model.dart';
-import 'package:telehealthcare/new_home/src/model/dactor_model.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/model/patient%20_model.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/model/dactor_model.dart';
 
-import 'package:telehealthcare/new_home/src/model/data.dart';
-import 'package:telehealthcare/new_home/src/theme/extention.dart';
-import 'package:telehealthcare/new_home/src/theme/light_color.dart';
-import 'package:telehealthcare/new_home/src/theme/text_styles.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/model/data.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/theme/extention.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/theme/light_color.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class DoctorsOnlyPage extends StatefulWidget {

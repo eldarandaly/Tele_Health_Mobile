@@ -1,7 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'constants.dart';
-import 'package:telehealthcare/signin.dart';
+import 'package:telehealthcare/sign_in/signin.dart';
 import 'package:telehealthcare/size_config.dart';
 import 'package:flutter/material.dart';
 

@@ -1,8 +1,8 @@
 import 'package:telehealthcare/drawer/custom_drawer.dart';
 import 'package:telehealthcare/heart_readings/heart_chart.dart';
-import 'package:telehealthcare/home_page.dart';
-import 'package:telehealthcare/new_home/home_main.dart';
-import 'package:telehealthcare/signin.dart';
+import 'package:telehealthcare/home/home_page.dart';
+import 'package:telehealthcare/bottom_bar_nav/home_main.dart';
+import 'package:telehealthcare/sign_in/signin.dart';
 import 'package:telehealthcare/user_data.dart';
 import 'package:intl/intl.dart';
 import 'package:gender_picker/source/enums.dart';

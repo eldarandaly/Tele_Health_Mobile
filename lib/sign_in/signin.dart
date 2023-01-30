@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:telehealthcare/database.dart';
-import 'package:telehealthcare/new_home/src/theme/extention.dart';
-import 'package:telehealthcare/new_home/src/theme/text_styles.dart';
-import 'package:telehealthcare/seach_in_forget_pass.dart';
-import 'package:telehealthcare/sign_up_2.dart';
-import 'package:telehealthcare/sign_up_transition.dart';
+import 'package:telehealthcare/data_base/database.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/theme/extention.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/theme/text_styles.dart';
+import 'package:telehealthcare/regestier/seach_in_forget_pass.dart';
+import 'package:telehealthcare/regestier/sign_up_2.dart';
+import 'package:telehealthcare/regestier/sign_up_transition.dart';
 import 'package:telehealthcare/user_data.dart';
-import 'authentication.dart';
-import 'register.dart';
-import 'forget pass.dart';
-import 'sign_up_2.dart';
-import 'package:telehealthcare/home_page.dart';
+import '../data_base/authentication.dart';
+import '../regestier/register.dart';
+import '../regestier/forget pass.dart';
+import '../regestier/sign_up_2.dart';
+import 'package:telehealthcare/home/home_page.dart';
 import 'package:flutter/services.dart';
 
 class signin extends StatefulWidget {

@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:telehealthcare/database.dart';
-import 'package:telehealthcare/sign_up_2.dart';
-import 'package:telehealthcare/signin.dart';
-import 'authentication.dart';
-import 'user_data.dart';
+import 'package:telehealthcare/data_base/database.dart';
+import 'package:telehealthcare/regestier/sign_up_2.dart';
+import 'package:telehealthcare/sign_in/signin.dart';
+import '../data_base/authentication.dart';
+import '../user_data.dart';
 import 'package:intl/intl.dart';
 import 'package:gender_picker/source/enums.dart';
 import 'package:gender_picker/source/gender_picker.dart';

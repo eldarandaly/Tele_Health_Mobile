@@ -3,7 +3,7 @@ import 'package:telehealthcare/drawer/custom_drawer.dart';
 
 import 'package:flutter/material.dart';
 import 'package:telehealthcare/API/api_calls.dart';
-import 'package:telehealthcare/new_home/src/model/patient%20_model.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/model/patient%20_model.dart';
 import 'package:telehealthcare/user_data.dart';
 import '../model/dactor_model.dart';
 import '../model/data.dart';

@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:telehealthcare/sign_up_2.dart';
-import 'package:telehealthcare/signin.dart';
+import 'package:telehealthcare/regestier/sign_up_2.dart';
+import 'package:telehealthcare/sign_in/signin.dart';
 import 'register.dart';
-import 'database.dart';
-import 'authentication.dart';
-import 'user_data.dart';
+import '../data_base/database.dart';
+import '../data_base/authentication.dart';
+import '../user_data.dart';
 
 class signup2 extends StatefulWidget {
   MyUser savedUser;

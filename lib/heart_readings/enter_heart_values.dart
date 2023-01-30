@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:telehealthcare/API/api_calls.dart';
 import 'package:telehealthcare/check_herat/chechk_heart_screen.dart';
-import 'package:telehealthcare/sign_up_transition.dart';
+import 'package:telehealthcare/regestier/sign_up_transition.dart';
 import 'package:telehealthcare/size_config.dart';
 import 'package:telehealthcare/user_data.dart';
 import 'package:telehealthcare/profile/profile_body.dart';

@@ -9,14 +9,14 @@ import 'package:telehealthcare/check_herat/chechk_heart_screen.dart';
 import 'package:telehealthcare/drawer/custom_drawer.dart';
 import 'package:telehealthcare/firebase_options.dart';
 import 'package:telehealthcare/heart_readings/heart_chart_test.dart';
-import 'package:telehealthcare/sign_up_transition.dart';
+import 'package:telehealthcare/regestier/sign_up_transition.dart';
 import 'package:telehealthcare/size_config.dart';
 import 'package:telehealthcare/user_data.dart';
 import 'package:telehealthcare/profile/profile_body.dart';
 import 'dart:convert';
-import 'heart_readings/enter_heart_values.dart';
-import 'heart_readings/heart_chart.dart';
-import 'new_home/home_main.dart';
+import '../heart_readings/enter_heart_values.dart';
+import '../heart_readings/heart_chart.dart';
+import '../bottom_bar_nav/home_main.dart';
 
 String globleE = '';
 final body = {

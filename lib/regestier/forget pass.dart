@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:telehealthcare/seach_in_forget_pass.dart';
-import 'package:telehealthcare/signin.dart';
-import 'main.dart';
+import 'package:telehealthcare/regestier/seach_in_forget_pass.dart';
+import 'package:telehealthcare/sign_in/signin.dart';
+import '../main.dart';
 
 class forgetpass extends StatelessWidget {
   const forgetpass({super.key});

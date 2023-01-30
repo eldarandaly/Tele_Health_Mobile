@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:telehealthcare/sign_up_2.dart';
-import 'package:telehealthcare/signin.dart';
-import 'main.dart';
-import 'authentication.dart';
+import 'package:telehealthcare/regestier/sign_up_2.dart';
+import 'package:telehealthcare/sign_in/signin.dart';
+import '../main.dart';
+import '../data_base/authentication.dart';
 import 'package:telehealthcare/main.dart';
 
 final email = TextEditingController();

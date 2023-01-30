@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:telehealthcare/new_home/src/model/patient%20_model.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/model/patient%20_model.dart';
 import '../theme/light_color.dart';
 import '../model/dactor_model.dart';
 import '../theme/text_styles.dart';

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:telehealthcare/API/api_calls.dart';
 import 'package:telehealthcare/drawer/custom_drawer.dart';
-import 'package:telehealthcare/new_home/src/theme/extention.dart';
-import 'package:telehealthcare/new_home/src/theme/light_color.dart';
-import 'package:telehealthcare/new_home/src/theme/text_styles.dart';
-import 'package:telehealthcare/new_home/src/theme/theme.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/theme/extention.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/theme/light_color.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/theme/text_styles.dart';
+import 'package:telehealthcare/bottom_bar_nav/src/theme/theme.dart';
 import 'package:telehealthcare/user_data.dart';
 
 // make a pop up meassage
