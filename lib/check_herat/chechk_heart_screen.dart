@@ -535,9 +535,9 @@ class TestClass extends State<TestThisClass> {
 
       setState(() {
         _result = response.toString();
-        ptd_result = response['ptd_result'].toString();
-        arrhy_result = response['arrhy_result'].toString();
-        rand_result = response['rand_result'].toString();
+        // ptd_result = response['ptd_result'].toString();
+        // arrhy_result = response['arrhy_result'].toString();
+        // rand_result = response['rand_result'].toString();
         // print(ptd_result);
       });
     } on Exception catch (e) {
@@ -575,8 +575,8 @@ class TestClass extends State<TestThisClass> {
       );
     }
     ;
-    return FutureBuilder<Map<String, dynamic>>(
-      future: _getModelReading.getModelData(),
+    return FutureBuilder<List<dynamic>>(
+      future: _getModelReading.getThreeModelsData(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final modelData = snapshot.data;
@@ -584,17 +584,24 @@ class TestClass extends State<TestThisClass> {
           //   variable[key] = value;
           //   print(modelData['age']);
           // });
-          age = modelData!['age'];
-          sex = modelData['sex'];
-          chestPainType = modelData['ChestpainType'];
-          restingBP = modelData['RestingBP'];
-          cholesterol = modelData['Cholesterol'];
-          fastingBS = modelData['FastingBS'];
-          restingECG = modelData['RestingECG'];
-          maxHR = modelData['MaxHR'];
-          exerciseAngina = modelData['ExerciseAngina'];
-          oldPeak = modelData['Oldpeak'];
-          stSlope = modelData['ST_Slope'];
+          arrhy_result = modelData![0]['arrhy_result'].toString();
+          ptd_result = modelData[0]['ptd_result'].toString();
+          rand_result = modelData[0]['rand_result'].toString();
+          if (ptd_result == 'false') {
+            ptd_result = 'Your Heart is Great';
+          } else if (ptd_result == 'true') {
+            _result = 'Please Call Your Doctor';
+          }
+          if (rand_result == 'false') {
+            rand_result = 'Your Heart is Great';
+          } else if (rand_result == 'true') {
+            rand_result = 'Please Call Your Doctor';
+          }
+          if (arrhy_result != 'Normal') {
+            arrhy_result = 'Call Your Doctor';
+          } else {
+            arrhy_result = 'Normal';
+          }
           return Container(
             // color: Color.fromRGBO(18, 18, 18, 0.95),
             child: Padding(

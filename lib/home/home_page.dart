@@ -227,30 +227,33 @@ class _BottomBarState extends State<BottomBar> {
             ),
           ],
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          onTap: (int index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-          // ignore: prefer_const_literals_to_create_immutables
-          items: [
-            // const BottomNavigationBarItem(
-            //     icon: Icon(Icons.favorite), label: 'You check'),
-            const BottomNavigationBarItem(
-                icon: Icon(Icons.heart_broken_outlined), label: 'Smart Check'),
-            const BottomNavigationBarItem(
-                icon: Icon(Icons.favorite_border), label: 'Heart Readings'),
-            const BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined), label: 'Home'),
-            const BottomNavigationBarItem(
-                icon: Icon(Icons.monitor_heart_outlined), label: 'Ecg Chart'),
-            const BottomNavigationBarItem(
-                icon: Icon(Icons.person_outline_sharp), label: 'Profile'),
-          ],
-          selectedItemColor: Colors.blue,
-          unselectedItemColor: Colors.black,
+        bottomNavigationBar: Container(
+          child: BottomNavigationBar(
+            currentIndex: _currentIndex,
+            onTap: (int index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+            // ignore: prefer_const_literals_to_create_immutables
+            items: [
+              // const BottomNavigationBarItem(
+              //     icon: Icon(Icons.favorite), label: 'You check'),
+              const BottomNavigationBarItem(
+                  icon: Icon(Icons.heart_broken_outlined),
+                  label: 'Smart Check'),
+              const BottomNavigationBarItem(
+                  icon: Icon(Icons.favorite_border), label: 'Heart Readings'),
+              const BottomNavigationBarItem(
+                  icon: Icon(Icons.home_outlined), label: 'Home'),
+              const BottomNavigationBarItem(
+                  icon: Icon(Icons.monitor_heart_outlined), label: 'Ecg Chart'),
+              const BottomNavigationBarItem(
+                  icon: Icon(Icons.person_outline_sharp), label: 'Profile'),
+            ],
+            selectedItemColor: Colors.blue,
+            unselectedItemColor: Colors.black,
+          ),
         ),
       );
     }

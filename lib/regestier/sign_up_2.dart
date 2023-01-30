@@ -139,43 +139,43 @@ class _signup2State extends State<signup2> {
           Container(height: 25),
           ElevatedButton(
               onPressed: () async {
-                if (_formkey.currentState!.validate()) {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text("Aleart"),
-                        content: Text('Please Enter All the Info.'),
-                        actions: <Widget>[
-                          ElevatedButton(
-                            child: const Text("OK"),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                } else {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text("Aleart"),
-                        content: Text('Saved ${WhatUser.email}'),
-                        actions: <Widget>[
-                          ElevatedButton(
-                            child: const Text("OK"),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }
+                // if (_formkey.currentState!.validate()) {
+                //   showDialog(
+                //     context: context,
+                //     builder: (BuildContext context) {
+                //       return AlertDialog(
+                //         title: const Text("Aleart"),
+                //         content: Text('Please Enter All the Info.'),
+                //         actions: <Widget>[
+                //           ElevatedButton(
+                //             child: const Text("OK"),
+                //             onPressed: () {
+                //               Navigator.of(context).pop();
+                //             },
+                //           ),
+                //         ],
+                //       );
+                //     },
+                //   );
+                // } else {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text("Aleart"),
+                      content: Text('Saved ${WhatUser.email}'),
+                      actions: <Widget>[
+                        ElevatedButton(
+                          child: const Text("OK"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+                // }
 
                 dynamic result =
                     await _auth.signupwithemailandpassword(email, password);

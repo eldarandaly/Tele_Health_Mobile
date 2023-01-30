@@ -338,6 +338,19 @@ class GetModelReading {
     // print(x);
     return data;
   }
+
+  Future<List> getThreeModelsData() async {
+    final DocumentSnapshot snapshot =
+        await _db.collection("users data").doc(WhatUser.email).get();
+    // Map<String, dynamic> dummyData = <String, dynamic>{'model_data': modelData};
+    List<dynamic> data = snapshot['Models_Predict'];
+    // if (data == null) {
+    //   return dummyData;
+    // }
+    // final x = data as List<Map<String, dynamic>>;
+    // print(x);
+    return data;
+  }
 }
 // class MyAPI {
 //   final dio = Dio();
