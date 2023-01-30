@@ -25,9 +25,9 @@ class CustomListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     if (WhatUser.isAdoctor == true) {
       return InkWell(
-        onTap: () {
-          x;
-        },
+        // onTap: () {
+        //   x;
+        // },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 500),
           width: isCollapsed ? 300 : 80,
@@ -222,13 +222,25 @@ class CustomListTile extends StatelessWidget {
                     children: [
                       Expanded(
                         flex: 4,
-                        child: Text(
-                          title,
-                          style: const TextStyle(
-                            color: Colors.white,
+                        child: TextButton(
+                          style: ButtonStyle(alignment: Alignment.topLeft),
+                          onPressed: () {
+                            if (x == null) {
+                            } else {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => x),
+                              );
+                            }
+                          },
+                          child: Text(
+                            title,
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.clip,
                           ),
-                          maxLines: 1,
-                          overflow: TextOverflow.clip,
                         ),
                       ),
                       if (infoCount > 0)

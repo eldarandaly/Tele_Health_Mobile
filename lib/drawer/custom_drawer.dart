@@ -23,7 +23,7 @@ class CustomDrawer extends StatefulWidget {
 }
 
 class _CustomDrawerState extends State<CustomDrawer> {
-  bool _isCollapsed = false;
+  bool _isCollapsed = true;
 
   @override
   Widget build(BuildContext context) {
