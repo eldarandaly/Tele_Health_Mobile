@@ -499,6 +499,10 @@ class TestClass extends State<TestThisClass> {
   final GetModelReading _getModelReading = GetModelReading();
   Map<String, dynamic> variable = <String, dynamic>{};
   String _result = "";
+  String rand_result = "";
+  String arrhy_result = "";
+  String ptd_result = "";
+
   final Api api = Api();
 
   late int age;
@@ -531,17 +535,30 @@ class TestClass extends State<TestThisClass> {
 
       setState(() {
         _result = response.toString();
-        print(_result);
+        ptd_result = response['ptd_result'].toString();
+        arrhy_result = response['arrhy_result'].toString();
+        rand_result = response['rand_result'].toString();
+        // print(ptd_result);
       });
     } on Exception catch (e) {
       setState(() {
         _result = e.toString();
       });
     }
-    if (_result == 'false') {
-      _result = 'Safe';
-    } else if (_result == 'true') {
+    if (ptd_result == 'false') {
+      ptd_result = 'Your Heart is Great';
+    } else if (ptd_result == 'true') {
       _result = 'Please Call Your Doctor';
+    }
+    if (rand_result == 'false') {
+      rand_result = 'Your Heart is Great';
+    } else if (rand_result == 'true') {
+      rand_result = 'Please Call Your Doctor';
+    }
+    if (arrhy_result != 'Normal') {
+      arrhy_result = 'Call Your Doctor';
+    } else {
+      arrhy_result = 'Normal';
     }
     if (age == 0) {
       if (_result == 'false') {
@@ -579,37 +596,41 @@ class TestClass extends State<TestThisClass> {
           oldPeak = modelData['Oldpeak'];
           stSlope = modelData['ST_Slope'];
           return Container(
-            color: Color.fromRGBO(18, 18, 18, 0.95),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(
-                  height: 310,
-                  width: 200,
-                  child: Column(
-                    children: [
-                      Container(
-                        width: 200,
-                        height: 200,
-                        child: _categoryCard(_result, "",
-                            color: LightColor.green,
-                            lightColor: LightColor.lightGreen),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          _recivePreds();
-                        },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white),
-                        child: Text(
-                          'Press To check',
-                          style: TextStyles.body.black,
+            // color: Color.fromRGBO(18, 18, 18, 0.95),
+            child: Padding(
+              padding: const EdgeInsets.all(48.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(
+                    // height: 310,
+                    // width: 200,
+                    child: Column(
+                      children: [
+                        Text(
+                          "What is your states of heart?                               ",
+                          style: TextStyles.title,
                         ),
-                      ),
-                    ],
+                        viewResult('Heart Attack Probability PTB', ptd_result),
+                        viewResult('Heart Arrhythmia', arrhy_result),
+                        viewResult('Heart Attack Probability', rand_result),
+                        ElevatedButton(
+                          onPressed: () {
+                            _recivePreds();
+                          },
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue),
+                          child: Text(
+                            'Check',
+                            style: TextStyles.titleM.white,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         } else if (snapshot.hasError) {
@@ -618,6 +639,42 @@ class TestClass extends State<TestThisClass> {
           return const CircularProgressIndicator();
         }
       },
+    );
+  }
+
+  Container viewResult(String title, String res) {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.all(30.0),
+        child: TextFormField(
+          enabled: false,
+          decoration: InputDecoration(
+            // icon: Icon(viewIcon),
+            hintStyle: TextStyle(
+              color: Colors.black,
+              fontFamily: "Muli",
+              fontSize: 15,
+            ),
+
+            labelStyle: TextStyle(
+              color: Colors.black,
+              fontFamily: "Muli",
+              fontSize: 22,
+            ),
+            labelText: title,
+            enabled: false,
+            hintText: res,
+            disabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.blue),
+              // borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+
+            // If  you are using latest version of flutter then lable text and hint text shown like this
+            // if you r using flutter less then 1.20.* then maybe this is not working properly
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+          ),
+        ),
+      ),
     );
   }
 }
